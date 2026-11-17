@@ -38,7 +38,15 @@ window.DECK = [
 
   { type: 'video',
     kicker: 'Associação Volvo em movimento',
-    title: 'Vídeo das modalidades' },
+    title: 'Vídeo das modalidades',
+    // vídeos do canal da Família AV no YouTube (o primeiro abre automaticamente)
+    youtube: [
+      { id: 'UACFpmUD5jg', title: 'Retrospectiva da Oliviking 2025' },
+      { id: 'Ph90xqEM2cE', title: 'Oliviking 2025 termina em grande estilo' },
+      { id: 'BiCF80YDWfw', title: 'Números da Oliviking 2025' },
+      { id: 'wNnm4eMn3X4', title: 'Beach tennis encerra a Oliviking' },
+      { id: 'hs2CwEHQtek', title: 'África do Sul conquista o prêmio da Oliviking' }
+    ] },
 
   { type: 'list',
     kicker: 'Lazer e convivência',

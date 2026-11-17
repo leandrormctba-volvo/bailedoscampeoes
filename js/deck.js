@@ -54,7 +54,13 @@
     video: s => `
       <div class="videoslide">
         <div class="head"><div class="kicker rv" ${d(0)}>${esc(s.kicker)}</div><div class="h2 rv" ${d(1)}>${esc(s.title)}</div></div>
-        <div class="player paused rv" ${d(2)} id="player"></div>
+        <div class="vwrap rv" ${d(2)}>
+          <div class="vmain"><div class="ytbox"><div id="ytplayer"></div></div><div class="player paused" id="player" hidden></div></div>
+          <div class="vlist">
+            ${(s.youtube || []).map((v, i) => `<button class="vitem${i ? '' : ' on'}" data-yt="${v.id}"><img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" alt=""><span>${esc(v.title)}</span></button>`).join('')}
+            <button class="vitem${s.youtube && s.youtube.length ? '' : ' on'}" data-yt="anim"><i class="animthumb">▶</i><span>Animação das modalidades AV</span></button>
+          </div>
+        </div>
       </div>`,
 
     photo: s => `
@@ -195,7 +201,7 @@
     s.querySelectorAll('[data-count]').forEach(countUp);
     const type = s.dataset.type;
     if (type === 'champs' || type === 'team' || type === 'final' || type === 'race') setTimeout(confetti, 500);
-    if (video) { if (type === 'video') video.play(true); else video.pause(); }
+    if (type === 'video') playCurrent(); else stopVideos();
     prog.style.width = ((cur + 1) / slides.length * 100) + '%';
     counter.textContent = `${cur + 1} / ${slides.length}`;
     history.replaceState(null, '', '#' + (cur + 1));
@@ -212,6 +218,50 @@
     if (ms && cur < slides.length - 1) autoT = setTimeout(next, ms);
   }
   if (video) video.onEnd = () => { if (auto) next(); };
+
+  /* ---------- vídeos do YouTube (Família AV) ---------- */
+  const firstItem = document.querySelector('.vitem.on');
+  let currentVid = firstItem ? firstItem.dataset.yt : 'anim';
+  let yt = null, ytLoading = false;
+  const ytbox = document.querySelector('.ytbox');
+  function loadYT() {
+    if (yt || ytLoading) return;
+    ytLoading = true;
+    const create = () => {
+      yt = new YT.Player('ytplayer', {
+        host: 'https://www.youtube-nocookie.com', videoId: currentVid,
+        playerVars: { rel: 0, modestbranding: 1, playsinline: 1, autoplay: 1 },
+        events: {
+          onReady: e => { if (slides[cur].dataset.type === 'video' && currentVid !== 'anim') e.target.playVideo(); },
+          onStateChange: e => { if (e.data === 0 && auto) next(); }
+        }
+      });
+    };
+    if (window.YT && YT.Player) return create();
+    window.onYouTubeIframeAPIReady = create;
+    const sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; document.head.appendChild(sc);
+  }
+  function showAnim(on) {
+    if (playerEl) playerEl.hidden = !on;
+    if (ytbox) ytbox.hidden = on;
+  }
+  function playCurrent() {
+    if (currentVid === 'anim') { showAnim(true); if (yt && yt.pauseVideo) yt.pauseVideo(); if (video) video.play(true); return; }
+    showAnim(false); if (video) video.pause();
+    if (!yt) loadYT();
+    else if (yt.getVideoData && yt.getVideoData().video_id !== currentVid) yt.loadVideoById(currentVid);
+    else if (yt.playVideo) yt.playVideo();
+  }
+  function stopVideos() {
+    if (video) video.pause();
+    if (yt && yt.pauseVideo) yt.pauseVideo();
+  }
+  document.querySelectorAll('.vitem').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    document.querySelectorAll('.vitem').forEach(x => x.classList.toggle('on', x === b));
+    currentVid = b.dataset.yt;
+    playCurrent();
+  }));
 
   const bPlay = document.getElementById('bPlay');
   function toggleAuto() { auto = !auto; bPlay.classList.toggle('on', auto); bPlay.textContent = auto ? '❚❚ Auto' : '▶ Auto'; schedule(); }
