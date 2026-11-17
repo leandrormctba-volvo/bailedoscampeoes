@@ -266,3 +266,45 @@ button { font: inherit; color: inherit; }
   font-style: normal; font-size: 30px; background: linear-gradient(135deg, var(--blue), var(--sky)); }
 .vitem:hover { background: rgba(255,255,255,.12); }
 .vitem.on { border-color: var(--gold); background: rgba(242,182,50,.14); }
+
+/* ===== v4: fotos reais (Família AV) no lugar de ícones e desenhos ===== */
+.item .thumb { flex: none; width: 84px; height: 84px; border-radius: 16px; object-fit: cover; border: 2px solid rgba(255,255,255,.25); box-shadow: 0 8px 20px rgba(0,0,0,.35); }
+.item .ic.num { font-size: 30px; font-weight: 900; font-style: italic; color: var(--navy);
+  background: linear-gradient(135deg, #ffe08a, var(--gold) 55%, #c98b1c); border: 0; width: 84px; height: 84px; border-radius: 16px; }
+.sports .item .thumb, .sports .item .ic.num { width: 64px; height: 64px; border-radius: 12px; }
+
+.mosaic { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 560px; transform: rotate(-3deg); }
+.mosaic img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px; border: 4px solid rgba(255,255,255,.9);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5); }
+.mosaic img:nth-child(2) { transform: translateY(26px) rotate(4deg); }
+.mosaic img:nth-child(3) { transform: rotate(-3deg); }
+.mosaic img:nth-child(4) { transform: translateY(26px) rotate(2deg); }
+.sports .art .cta { margin-top: 56px; }
+
+.credit { position: absolute; right: 16px; bottom: 12px; z-index: 2; font-size: 16px; font-weight: 700; color: #fff;
+  background: rgba(4,18,46,.6); padding: 4px 12px; border-radius: 999px; }
+
+/* campeões com foto + placas */
+.cpbody { flex: 1; display: grid; grid-template-columns: 640px 1fr; gap: 56px; align-items: center; padding-bottom: 90px; }
+.cpphoto { position: relative; height: 600px; border-radius: 30px; padding: 8px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,.55); }
+.cpphoto .ring { position: absolute; inset: -60%; background: conic-gradient(from 0deg, #8a5a10, var(--gold), #fff7d6, var(--gold), #8a5a10, var(--gold), #fff7d6, var(--gold), #8a5a10); animation: spin 8s linear infinite; }
+.cpphoto img { position: relative; width: 100%; height: 100%; object-fit: cover; border-radius: 23px; display: block; }
+.plates { display: flex; flex-direction: column; gap: 18px; justify-content: center; }
+.plate2 { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 26px; padding: 20px 28px; border-radius: 22px;
+  background: linear-gradient(100deg, rgba(242,182,50,.16), rgba(255,255,255,.05)); border: 2px solid rgba(242,182,50,.55); backdrop-filter: blur(8px); }
+.plate2.silver { background: linear-gradient(100deg, rgba(201,211,224,.16), rgba(255,255,255,.05)); border-color: rgba(201,211,224,.55); }
+.plate2 .medal { width: 96px; height: 96px; border-radius: 50%; display: grid; place-content: center; text-align: center; color: #3b2600;
+  background: radial-gradient(circle at 35% 30%, #fff6cf, var(--gold) 45%, #a8700f); box-shadow: 0 10px 24px rgba(0,0,0,.4), 0 0 0 5px rgba(255,255,255,.15); }
+.plate2.silver .medal { color: #1f2a38; background: radial-gradient(circle at 35% 30%, #fff, var(--silver) 45%, #7c8796); }
+.plate2 .medal b { font-size: 36px; font-weight: 900; line-height: .9; }
+.plate2 .medal small { font-size: 13px; font-weight: 800; letter-spacing: .1em; }
+.plate2 .nm { font-size: 40px; font-weight: 900; font-style: italic; text-transform: uppercase; line-height: 1.05; }
+.plate2 .dt { font-size: 24px; font-weight: 700; color: var(--gold2); margin-top: 6px; }
+.plate2.silver .dt { color: var(--silver); }
+.plate2 .lbl { font-size: 20px; font-weight: 900; letter-spacing: .2em; padding: 8px 16px; border-radius: 10px; background: var(--gold); color: var(--navy); }
+.plate2.silver .lbl { background: var(--silver); }
+.plates.n5 { gap: 12px; } .plates.n5 .plate2 { padding: 12px 24px; } .plates.n5 .medal { width: 72px; height: 72px; } .plates.n5 .medal b { font-size: 28px; }
+.plates.n5 .nm { font-size: 32px; } .plates.n5 .dt { font-size: 20px; margin-top: 2px; }
+.plates.n1 .plate2 { padding: 36px 40px; } .plates.n1 .medal { width: 130px; height: 130px; } .plates.n1 .medal b { font-size: 48px; } .plates.n1 .nm { font-size: 54px; }
+.teamframe { height: 700px; }
+.teamslide { grid-template-columns: .75fr 1.25fr; }

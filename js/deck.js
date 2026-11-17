@@ -41,12 +41,14 @@
 
     list: s => {
       const items = s.items.map((it, i) => `
-        <div class="item rv" ${d(i + 2)}><span class="ic">${it[0]}</span>
+        <div class="item rv" ${d(i + 2)}>${it[0] && it[0].startsWith('img/')
+          ? `<img class="thumb" src="${it[0]}" alt="">`
+          : `<span class="ic num">${String(i + 1).padStart(2, '0')}</span>`}
           <span><span class="t">${esc(it[1])}</span>${it[2] ? `<br><span class="n">${esc(it[2])}</span>` : ''}</span></div>`).join('');
       const head = `<div class="kicker rv" ${d(0)}>${esc(s.kicker)}</div><div class="h2 rv" ${d(1)}>${esc(s.title)}</div>`;
       if (s.variant === 'sports') return `
         <div class="sports"><div>${head}<div class="items">${items}</div></div>
-          <div class="art"><img class="zoomIn" ${d(3)} src="${s.img}" alt="">
+          <div class="art"><div class="mosaic zoomIn" ${d(3)}>${(s.mosaic || []).map(src => `<img src="${src}" alt="">`).join('')}</div>
           <button class="cta rv" ${d(13)} data-next><i>▶</i>${esc(s.cta)}</button></div></div>`;
       return `${head}<div class="items ${s.variant === 'grid' ? 'g3' : ''}">${items}</div>`;
     },
@@ -58,7 +60,6 @@
           <div class="vmain"><div class="ytbox"><div id="ytplayer"></div></div><div class="player paused" id="player" hidden></div></div>
           <div class="vlist">
             ${(s.youtube || []).map((v, i) => `<button class="vitem${i ? '' : ' on'}" data-yt="${v.id}"><img src="https://i.ytimg.com/vi/${v.id}/mqdefault.jpg" alt=""><span>${esc(v.title)}</span></button>`).join('')}
-            <button class="vitem${s.youtube && s.youtube.length ? '' : ' on'}" data-yt="anim"><i class="animthumb">▶</i><span>Animação das modalidades AV</span></button>
           </div>
         </div>
       </div>`,
@@ -78,7 +79,9 @@
         <div class="sub rv" ${d(2)}>${esc(s.sub)}</div>
       </div>`,
 
-    champs: s => {
+    champs: s => s.photo ? R.champsPhoto(s) : R.champsArt(s),
+
+    champsArt: s => {
       const n = s.people.length;
       const [ar1, ar2] = (s.aspect || '3/4').split('/').map(Number);
       const ratio = ar1 / ar2;
@@ -104,6 +107,29 @@
       </div>`;
     },
 
+    // campeões: foto real da modalidade (Família AV) + placas com medalha e nome
+    champsPhoto: s => {
+      const n = s.people.length;
+      const plates = s.people.map((p, i) => {
+        const silver = p.place === 2;
+        return `
+          <div class="plate2 ${silver ? 'silver' : 'gold'} rv" style="--d:${(0.45 + i * 0.12).toFixed(2)}s">
+            <div class="medal"><b>${p.place}º</b><small>LUGAR</small></div>
+            <div class="pt"><div class="nm">${esc(p.name)}</div><div class="dt">${esc(p.detail)}</div></div>
+            <div class="lbl">${silver ? 'VICE' : 'CAMPEÃO'}</div>
+          </div>`;
+      }).join('');
+      return `
+      <div class="champs cp">
+        <div class="top"><div><div class="kicker rv" ${d(0)}>Premiação · ${esc(s.group)}</div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div></div>
+          ${s.stage ? `<div class="stagepill rv" ${d(2)}>${esc(s.stage)}</div>` : ''}</div>
+        <div class="cpbody">
+          <div class="cpphoto zoomIn" ${d(2)}><div class="ring"></div><img src="${s.photo}" alt="${esc(s.sport)}"><span class="credit">Foto ilustrativa · Família AV</span></div>
+          <div class="plates n${n}">${plates}</div>
+        </div>
+      </div>`;
+    },
+
     race: s => `
       <div class="race">
         <div><div class="kicker rv" ${d(0)}>Premiação · ${esc(s.group)}</div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div>
@@ -118,12 +144,11 @@
     team: s => `
       <div class="teamslide">
         <div><div class="kicker rv" ${d(0)}>Premiação · Coletivas</div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div>
-          <div class="trophy rv" ${d(2)}>🏆</div>
           <div class="teamname goldtext rv ${s.team.length > 12 ? 'sm' : ''}" ${d(3)}>${esc(s.team)}</div>
           ${s.members ? '' : `<div class="teamlbl rv" ${d(4)}>Equipe campeã</div>`}
           ${s.members ? `<div class="members rv" ${d(5)}>${s.members.map(m => `<span>${esc(m)}</span>`).join('')}</div>` : ''}
         </div>
-        <div class="teamframe zoomIn" ${d(2)}><div class="ring"></div><img src="${pic(s, 1.15, 1200)}" alt="${esc(s.sport)}"></div>
+        <div class="teamframe zoomIn" ${d(2)}><div class="ring"></div><img src="${pic(s, 1.15, 1200)}" alt="${esc(s.sport)}"><span class="credit">Foto ilustrativa · Família AV</span></div>
       </div>`,
 
     final: s => `
