@@ -308,3 +308,63 @@ button { font: inherit; color: inherit; }
 .plates.n1 .plate2 { padding: 36px 40px; } .plates.n1 .medal { width: 130px; height: 130px; } .plates.n1 .medal b { font-size: 48px; } .plates.n1 .nm { font-size: 54px; }
 .teamframe { height: 700px; }
 .teamslide { grid-template-columns: .75fr 1.25fr; }
+
+/* ===== v5 ===== */
+/* Logo Associação Volvo: mais no rodapé e um pouco mais transparente */
+.brand { bottom: 14px; opacity: .32; }
+
+/* Capa com troféu */
+.cover { grid-template-columns: 1fr .9fr; }
+.trophy-wrap { position: relative; width: 680px; height: 860px; justify-self: center; display: grid; place-items: center; }
+.trophy-svg { position: relative; width: 520px; filter: drop-shadow(0 40px 60px rgba(0,0,0,.55)); animation: float 6s ease-in-out infinite; }
+.trophy-rays { position: absolute; left: 50%; top: 42%; width: 1300px; height: 1300px; margin: -650px 0 0 -650px; opacity: .35;
+  background: repeating-conic-gradient(from 0deg, rgba(242,182,50,.9) 0deg 3deg, transparent 3deg 15deg);
+  -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 55%); mask-image: radial-gradient(circle, #000 0%, transparent 55%); animation: spin 70s linear infinite; }
+.trophy-glow { position: absolute; left: 50%; top: 32%; width: 620px; height: 620px; margin: -310px 0 0 -310px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,214,120,.55), rgba(242,182,50,.12) 45%, transparent 70%); animation: pulse 4s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.08); opacity: .8; } }
+.shinebar { animation: shinebar 4.5s ease-in-out infinite; }
+@keyframes shinebar { 0% { transform: skewX(-18deg) translateX(0); } 60%, 100% { transform: skewX(-18deg) translateX(820px); } }
+.spark { position: absolute; width: 26px; height: 26px; background: #fff7d6; animation: twinkle 2.6s ease-in-out infinite;
+  clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 8px #ffe08a); }
+.spark.s1 { left: 90px; top: 150px; } .spark.s2 { right: 80px; top: 230px; animation-delay: .7s; width: 34px; height: 34px; }
+.spark.s3 { left: 140px; top: 470px; animation-delay: 1.3s; width: 18px; height: 18px; } .spark.s4 { right: 130px; top: 520px; animation-delay: 1.9s; }
+.spark.s5 { left: 300px; top: 40px; animation-delay: .4s; width: 20px; height: 20px; }
+@keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(.4) rotate(0); } 50% { opacity: 1; transform: scale(1) rotate(45deg); } }
+
+/* Modalidades: só nomes + ícone do esporte */
+.listhead { display: flex; align-items: flex-end; justify-content: space-between; }
+.listhead .cta { margin: 0 0 10px; }
+.items.sportsgrid { grid-template-columns: 1fr 1fr; gap: 22px 34px; margin-top: 44px; }
+.items.sportsgrid .item { min-height: 112px; padding: 18px 30px; }
+.items.sportsgrid .item .t { font-size: 34px; }
+.ic.sport { flex: none; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; color: var(--gold);
+  background: radial-gradient(circle at 35% 30%, #123e86, #06173d); border: 2px solid rgba(242,182,50,.7); box-shadow: 0 0 22px rgba(242,182,50,.25); }
+.ic.sport svg { width: 46px; height: 46px; }
+.item:hover .ic.sport { transform: rotate(-12deg) scale(1.06); transition: transform .3s; }
+
+/* Listas sem ícone: barra dourada à esquerda */
+.item.plain { position: relative; padding-left: 40px; overflow: hidden; }
+.item.plain::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; background: linear-gradient(180deg, var(--gold), #d97a1c); }
+.items.dense { gap: 16px 22px; margin-top: 36px; }
+.items.dense .item { min-height: 112px; padding: 14px 22px 14px 34px; }
+.items.dense .item .t { font-size: 26px; }
+.items.dense .item .n { font-size: 18px; }
+
+/* Vídeo em tela grande, sem títulos e sem lista */
+.t-video { padding: 40px 120px 90px; }
+.videoslide.big { height: 100%; display: grid; place-items: center; margin: 0; }
+.vmain.big { width: 1600px; max-width: 100%; }
+
+/* Aberturas: título mais acima/à esquerda + box com as modalidades */
+.t-divider .txt { top: 110px; transform: none; }
+.t-divider .h1 { margin-top: 0; }
+.mlist { margin-top: 44px; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 14px 16px; max-width: 980px; }
+.mlist span { font-size: 30px; font-weight: 800; padding: 14px 26px; border-radius: 16px; background: rgba(4,18,46,.55); border: 2px solid rgba(242,182,50,.55);
+  backdrop-filter: blur(6px); white-space: nowrap; }
+.items.dense { grid-template-columns: repeat(4, 1fr); gap: 18px 20px; margin-top: 44px; }
+.items.dense .item { min-height: 150px; }
+.items.dense .item .t { font-size: 27px; }
+.mlist { grid-template-columns: repeat(3, 300px); gap: 14px; padding: 26px; border-radius: 26px; max-width: none; width: fit-content;
+  background: rgba(4,18,46,.55); border: 2px solid rgba(242,182,50,.45); backdrop-filter: blur(10px); }
+.mlist span { font-size: 32px; text-align: center; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.18); padding: 16px 18px; }

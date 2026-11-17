@@ -8,13 +8,10 @@ const F = n => 'img/fav/' + n + '.jpg';
 
 window.DECK = [
   { type: 'cover',
-    kicker: 'Festa dos Campeões',
     title: ['MELHORES', 'DO ANO'],
-    tag: 'AV 2026',
-    img: 'img/capa-medalha.jpg' },
+    tag: 'AV 2026' },
 
   { type: 'numbers',
-    kicker: 'Retrospectiva',
     title: 'O ano em números',
     items: [
       { n: 10, label: 'modalidades esportivas', sub: 'campeonatos, torneios e rankings' },
@@ -26,20 +23,17 @@ window.DECK = [
     ] },
 
   { type: 'list', variant: 'sports',
-    kicker: 'Esporte o ano inteiro',
     title: 'Modalidades',
-    mosaic: [F('volei'), F('futevolei'), F('tenis3'), F('bola8')],
+    // 'ic:nome' = ícone do esporte (lista de ícones em js/deck.js)
     items: [
-      [F('volei'), 'Campeonato de Vôlei'], [F('futfem'), 'Campeonato de Futsal'], [F('futmasc'), 'Campeonato de Fut-7'],
-      [F('basquete'), 'Torneio de Basquete'], [F('xadrez2'), 'Torneios de Xadrez'], [F('tenis2'), 'Torneios de Tênis'],
-      [F('truco2'), 'Ranking de Truco — 1º e 2º turnos'], [F('poker'), 'Poker'], [F('futevoleif'), 'Futevôlei'], [F('bola8'), 'Torneios de Bola Oito']
+      ['ic:volei', 'Campeonato de Vôlei'], ['ic:futsal', 'Campeonato de Futsal'], ['ic:fut7', 'Campeonato de Fut-7'],
+      ['ic:basquete', 'Torneio de Basquete'], ['ic:xadrez', 'Torneios de Xadrez'], ['ic:tenis', 'Torneios de Tênis'],
+      ['ic:truco', 'Ranking de Truco — 1º e 2º turnos'], ['ic:poker', 'Poker'], ['ic:futevolei', 'Futevôlei'], ['ic:bola8', 'Torneios de Bola Oito']
     ],
-    cta: 'Assistir ao vídeo das modalidades' },
+    cta: 'Assistir ao vídeo' },
 
   { type: 'video',
-    kicker: 'Associação Volvo em movimento',
-    title: 'Vídeo das modalidades',
-    // vídeos do canal da Família AV no YouTube (o primeiro abre automaticamente)
+    // vídeo do canal da Família AV no YouTube (toca o primeiro da lista, em tela grande)
     youtube: [
       { id: 'UACFpmUD5jg', title: 'Retrospectiva da Oliviking 2025' },
       { id: 'Ph90xqEM2cE', title: 'Oliviking 2025 termina em grande estilo' },
@@ -48,55 +42,45 @@ window.DECK = [
       { id: 'hs2CwEHQtek', title: 'África do Sul conquista o prêmio da Oliviking' }
     ] },
 
-  { type: 'list',
-    kicker: 'Lazer e convivência',
+  { type: 'list', variant: 'dense',
     title: 'Atividades',
     items: [
-      [F('colonia'), 'Colônia de Férias de verão e inverno'], [F('havai'), 'Bailes do Hawaii, Gauchesco e Noite do Horror'],
-      ['', 'Karaokê (com banda)'], [F('tardezinha'), 'Tardezinha'], ['', 'CozinhaFácil'], [F('julina'), 'Festa Julina'],
-      [F('criancas'), 'Festa das Crianças'], [F('carros'), 'Encontro de Carros Antigos']
-    ] },
-
-  { type: 'list',
-    kicker: 'E tem mais',
-    title: '+ Atividades',
-    items: [
+      ['', 'Colônia de Férias de verão e inverno'], ['', 'Bailes do Hawaii, Gauchesco e Noite do Horror'],
+      ['', 'Karaokê (com banda)'], ['', 'Tardezinha'], ['', 'CozinhaFácil'], ['', 'Festa Julina'],
+      ['', 'Festa das Crianças'], ['', 'Encontro de Carros Antigos'],
       ['', 'Fazendo Arte, Camarim de pintura'], ['', 'Excursões: Cruzeiro Nordeste, Foz do Iguaçu e Beto Carrero'],
-      [F('trilhas'), 'Passeios ecológicos: trilhas em Bombinhas, Caverna do Diabo e Morro da Faxina'],
-      ['', 'Cursos de Queijos e Vinhos, Harmonização de Cervejas e Bartender'],
+      ['', 'Passeios ecológicos: Bombinhas, Caverna do Diabo e Morro da Faxina'],
+      ['', 'Cursos de Queijos e Vinhos, Cervejas e Bartender'],
       ['', 'Escolinha de Futebol', 'Novidade: turmas em dias de semana'], ['', 'Aula de Patins'],
-      [F('ballet'), 'Aulas de Ballet'], ['', 'Dia das Mães, Dia dos Pais e almoço de Páscoa']
+      ['', 'Aulas de Ballet'], ['', 'Dia das Mães, Dia dos Pais e almoço de Páscoa']
     ] },
 
   { type: 'list', variant: 'grid',
-    kicker: 'Nosso clube mais completo',
     title: 'Melhorias',
     items: [
       ['', 'Reforma do Salão VIP'], ['', 'Reforma do Quiosque'], ['', 'Novo Espaço de Lazer'],
-      ['', 'Adequação do Espaço Soccer'], [F('tenis4'), 'Reforma da Quadra de Tênis (saibro)'],
+      ['', 'Adequação do Espaço Soccer'], ['', 'Reforma da Quadra de Tênis (saibro)'],
       ['', 'Nova divulgação nas redes sociais (Instagram)'], ['', 'Reforma do Viveiro das Aves'],
       ['', 'Espaço Pet'], ['', 'Painéis de LED no Centro de Eventos'],
-      [F('infra'), 'Sistema de câmeras em todo o clube'], [F('kids'), 'Novo piso e brinquedos no parquinho do Soccer']
+      ['', 'Sistema de câmeras em todo o clube'], ['', 'Novo piso e brinquedos no parquinho do Soccer']
     ] },
 
   { type: 'list', variant: 'grid',
-    kicker: 'O que vem por aí',
     title: 'Próximos passos',
     items: [
-      [F('app'), 'Novo App da Associação'], ['', 'Nova Churrasqueira'], ['', 'Nova Academia e Administrativo'],
-      ['', 'Salas de Lutas'], [F('ballet'), 'Ballet'], ['', 'Jogos'],
-      ['', 'Novas Excursões'], [F('colonia'), 'Colônias de Férias'], ['', 'Cosplay — 21/04']
+      ['', 'Novo App da Associação'], ['', 'Nova Churrasqueira'], ['', 'Nova Academia e Administrativo'],
+      ['', 'Salas de Lutas'], ['', 'Ballet'], ['', 'Jogos'],
+      ['', 'Novas Excursões'], ['', 'Colônias de Férias'], ['', 'Cosplay — 21/04']
     ] },
 
   { type: 'photo',
-    kicker: 'Quem faz acontecer',
     title: 'Nosso time',
-    img: F('campeoes') },
+    img: F('campeoes') },  // trocar pela foto da equipe da Associação Volvo
 
   { type: 'divider',
-    kicker: 'Premiação dos campeões',
     title: 'Modalidades',
     sub: 'Individuais ou duplas',
+    list: ['Bola 8', 'Corrida Rústica', 'Tênis', 'Poker', 'Beach Tennis', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez'],
     img: 'img/abertura-individuais.jpg' },
 
   { type: 'champs', group: 'Individuais', sport: 'Bola 8', photo: F('bola8'),
@@ -159,9 +143,9 @@ window.DECK = [
       { name: 'Everson Machado', detail: 'Vice-campeão · 2ª etapa', place: 2 } ] },
 
   { type: 'divider',
-    kicker: 'Premiação dos campeões',
     title: 'Modalidades',
     sub: 'Coletivas',
+    list: ['Basquete 3x3', 'Futsal Feminino', 'Futsal Masculino', 'Fut-7', 'Vôlei Feminino', 'Vôlei Masculino'],
     img: 'img/abertura-coletivas.jpg' },
 
   { type: 'team', sport: 'Basquete 3x3', team: 'Vaticano', img: F('basquete') },
