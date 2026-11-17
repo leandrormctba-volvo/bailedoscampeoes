@@ -75,7 +75,7 @@ window.DECK = [
 
   { type: 'photo',
     title: 'Nosso time',
-    img: F('campeoes') },  // trocar pela foto da equipe da Associação Volvo
+    img: 'img/nosso-time.webp' },  // foto da equipe da Associação Volvo
 
   { type: 'divider',
     title: 'Modalidades',
