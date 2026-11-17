@@ -238,3 +238,16 @@ button { font: inherit; color: inherit; }
 .teamframe { height: 740px; margin-top: -40px; }
 .champ.solo .plate, .champ.solo .step { width: max(100%, 900px); }
 .champ.solo .step { width: max(100%, 420px); }
+
+/* ===== Ajustes v3: capa, logo discreto e visual mais esportivo ===== */
+/* AV 2026 em branco, mesmo tamanho de "MELHORES DO ANO" */
+.cover .tag { display: block; margin-top: 0; padding: 0; border-radius: 0; background: none; box-shadow: none;
+  color: #fff; font-size: 168px; font-weight: 900; font-style: italic; line-height: .95; letter-spacing: -.02em; text-transform: uppercase; }
+
+/* Logo Associação Volvo: centralizado embaixo e semitransparente em todos os slides */
+.brand { bottom: 30px; opacity: .45; }
+
+/* Títulos com pegada esportiva (itálico forte) */
+.h1, .h2, .teamname { font-style: italic; }
+.kicker::before { width: 64px; height: 6px; border-radius: 2px; transform: skewX(-30deg);
+  background: linear-gradient(90deg, var(--gold) 0 45%, transparent 45% 55%, var(--sky) 55%); }
