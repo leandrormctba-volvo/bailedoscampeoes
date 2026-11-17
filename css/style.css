@@ -368,3 +368,57 @@ button { font: inherit; color: inherit; }
 .mlist { grid-template-columns: repeat(3, 300px); gap: 14px; padding: 26px; border-radius: 26px; max-width: none; width: fit-content;
   background: rgba(4,18,46,.55); border: 2px solid rgba(242,182,50,.45); backdrop-filter: blur(10px); }
 .mlist span { font-size: 32px; text-align: center; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.18); padding: 16px 18px; }
+
+/* ===== v6 ===== */
+/* Logo Associação Volvo: fora do palco, colado no pé da tela, centralizado e transparente */
+.brand { position: fixed; left: 0; right: 0; bottom: calc(8px * var(--k, 1)); opacity: .32; z-index: 6; }
+.brand img { height: calc(56px * var(--k, 1)); }
+.brand span { font-size: calc(36px * var(--k, 1)); }
+
+/* Capa: estrela dourada brilhante (sem troféu, sem textos) */
+.star-wrap { width: 760px; height: 860px; }
+.star-wrap .trophy-rays { top: 50%; opacity: .45; }
+.star-wrap .trophy-glow { top: 50%; width: 760px; height: 760px; margin: -380px 0 0 -380px;
+  background: radial-gradient(circle, rgba(255,226,140,.75), rgba(242,182,50,.22) 40%, transparent 70%); }
+.star-svg { position: relative; width: 640px; filter: drop-shadow(0 0 28px rgba(255,214,110,.75)) drop-shadow(0 30px 50px rgba(0,0,0,.5));
+  animation: starfloat 6s ease-in-out infinite; }
+@keyframes starfloat { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-18px) rotate(3deg); } }
+.star-svg .shinebar { animation: starshine 4s ease-in-out infinite; }
+@keyframes starshine { 0% { transform: skewX(-18deg) translateX(0); } 55%, 100% { transform: skewX(-18deg) translateX(900px); } }
+.flare { position: absolute; left: 50%; top: 50%; pointer-events: none; border-radius: 50%; mix-blend-mode: screen; animation: flare 4s ease-in-out infinite; }
+.flare.h { width: 900px; height: 10px; margin: -5px 0 0 -450px; background: radial-gradient(ellipse, rgba(255,250,225,.95), rgba(255,214,120,.35) 35%, transparent 70%); }
+.flare.v { width: 10px; height: 700px; margin: -350px 0 0 -5px; background: radial-gradient(ellipse, rgba(255,250,225,.9), rgba(255,214,120,.3) 35%, transparent 70%); animation-delay: .4s; }
+@keyframes flare { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
+.star-core { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,240,190,.45) 40%, transparent 70%); mix-blend-mode: screen; animation: pulse 3s ease-in-out infinite; }
+
+/* Próximos passos: cada box com foto (ou "?" até a foto chegar) */
+.items.photos { gap: 22px 26px; margin-top: 40px; }
+.items.photos .item { min-height: 200px; padding: 16px 26px 16px 16px; gap: 24px; }
+.items.photos .item .thumb { width: 168px; height: 168px; border-radius: 18px; }
+.items.photos .item .t { font-size: 32px; }
+.thumb.ph { flex: none; display: grid; place-items: center; font-size: 84px; font-weight: 900; color: rgba(242,182,50,.85);
+  background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 14px, rgba(255,255,255,.09) 14px 28px); border: 2px dashed rgba(242,182,50,.55); box-shadow: none; }
+
+/* Nosso time: título no topo centralizado e foto grande */
+.t-photo { padding-top: 46px; }
+.photoslide.top { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+.photoslide.top .h2 { margin-top: 0; text-align: center; }
+.photoslide.top .bigframe { width: 1080px; height: 810px; }
+
+/* Aberturas: foto mais discreta, modalidades em destaque (box e fonte 2x, caixa alta) */
+.t-divider .bgimg { opacity: .3; filter: saturate(.6); }
+.t-divider .txt { top: 70px; }
+.t-divider .h1 { font-size: 130px; }
+.t-divider .sub { margin-top: 22px; font-size: 46px; }
+.mlist { margin-top: 40px; grid-template-columns: repeat(2, 790px); gap: 18px 22px; padding: 30px; border-width: 3px; }
+.mlist span { font-size: 60px; font-weight: 900; text-transform: uppercase; letter-spacing: .01em; padding: 18px 30px; text-align: left; }
+.mlist span::before { content: ''; display: inline-block; width: 18px; height: 18px; margin: 0 22px 10px 0; border-radius: 4px; background: var(--gold); transform: rotate(45deg); vertical-align: middle; }
+
+/* Parabéns: texto à esquerda, fora de cima do troféu da foto */
+.t-final .bgimg { left: 34%; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 35%); mask-image: linear-gradient(90deg, transparent 0%, #000 35%); }
+.t-final .txt { align-items: flex-start; text-align: left; padding-left: 120px; }
+/* Dupla com um nome em cada linha */
+.plates .plate2 .nm.two { font-size: 40px; line-height: 1.15; white-space: nowrap; }
+.t-final .h1 { padding-top: .14em; line-height: 1.05; }
+.t-final .bgimg { left: 40%; }

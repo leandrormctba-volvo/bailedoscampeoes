@@ -17,14 +17,15 @@
   <div id="stage">
     <div id="slides"></div>
     <canvas id="confetti" width="1920" height="1080" aria-hidden="true"></canvas>
-    <!-- Logo Associação Volvo: se existir o arquivo img/logo-associacao-volvo.png, ele aparece no lugar do texto -->
-    <footer class="brand">
-      <img id="logoImg" src="img/logo-associacao-volvo.png" alt="Associação Volvo" hidden
-           onload="this.hidden=false;document.getElementById('logoText').hidden=true">
-      <span id="logoText">ASSOCIAÇÃO VOLVO</span>
-    </footer>
   </div>
 </div>
+
+<!-- Logo Associação Volvo: fica no pé da tela (centralizado), em todos os slides -->
+<footer class="brand">
+  <img id="logoImg" src="img/logo-associacao-volvo.png" alt="Associação Volvo" hidden
+       onload="this.hidden=false;document.getElementById('logoText').hidden=true">
+  <span id="logoText">ASSOCIAÇÃO VOLVO</span>
+</footer>
 
 <nav id="hud" aria-label="Controles da apresentação">
   <div class="bar"><i id="progress"></i></div>

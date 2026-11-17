@@ -33,30 +33,39 @@
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ''}</svg>`;
 
-  // troféu da capa (desenhado em SVG, com o logo da Associação Volvo na base)
-  const TROPHY = `
-    <svg class="trophy-svg" viewBox="0 0 600 780" aria-label="Troféu Associação Volvo">
+  // estrela dourada facetada (efeito metálico 3D, luz vindo do alto à esquerda)
+  const STAR = (() => {
+    const C = 300, R = 280, r = 112, L = [-0.55, -0.83];
+    const P = (a, rad) => [C + rad * Math.cos(a * Math.PI / 180), C + rad * Math.sin(a * Math.PI / 180)];
+    const lo = [96, 56, 6], hi = [255, 246, 205];
+    const col = t => `rgb(${lo.map((v, i) => Math.round(v + (hi[i] - v) * t)).join(',')})`;
+    let facets = '', outline = [];
+    for (let k = 0; k < 5; k++) {
+      const a = -90 + 72 * k, O = P(a, R), Ia = P(a - 36, r), Ib = P(a + 36, r);
+      outline.push(Ia, O);
+      for (const I of [Ia, Ib]) {
+        // normal da face = perpendicular à aresta externa, apontando para fora
+        let nx = -(O[1] - I[1]), ny = O[0] - I[0];
+        const mx = (O[0] + I[0]) / 2 - C, my = (O[1] + I[1]) / 2 - C;
+        if (nx * mx + ny * my < 0) { nx = -nx; ny = -ny; }
+        const n = Math.hypot(nx, ny), t = Math.max(0, Math.min(1, .5 + .55 * ((nx / n) * L[0] + (ny / n) * L[1])));
+        facets += `<path d="M${C} ${C}L${I.map(v => v.toFixed(1))}L${O.map(v => v.toFixed(1))}Z" fill="${col(t)}"/>`;
+      }
+    }
+    const pts = outline.map(p => p.map(v => v.toFixed(1)).join(' ')).join(' L');
+    return `
+    <svg class="star-svg" viewBox="0 0 600 600" aria-label="Estrela dourada">
       <defs>
-        <linearGradient id="tg" x1="0" x2="1"><stop offset="0" stop-color="#7a4c0c"/><stop offset=".22" stop-color="#d99a26"/><stop offset=".45" stop-color="#fff2b8"/><stop offset=".62" stop-color="#f2b632"/><stop offset="1" stop-color="#8a5a10"/></linearGradient>
-        <linearGradient id="tg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a0"/><stop offset="1" stop-color="#b8801c"/></linearGradient>
-        <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-        <clipPath id="cupclip"><path d="M150 118h300c0 205-66 300-150 312-84-12-150-107-150-312z"/></clipPath>
+        <radialGradient id="sg" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        <linearGradient id="shine" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <clipPath id="starclip"><path d="M${pts}Z"/></clipPath>
       </defs>
-      <path d="M160 150c-95-8-112 150 40 205" fill="none" stroke="url(#tg)" stroke-width="26" stroke-linecap="round"/>
-      <path d="M440 150c95-8 112 150-40 205" fill="none" stroke="url(#tg)" stroke-width="26" stroke-linecap="round"/>
-      <path d="M150 118h300c0 205-66 300-150 312-84-12-150-107-150-312z" fill="url(#tg)"/>
-      <g clip-path="url(#cupclip)"><rect class="shinebar" x="-160" y="80" width="110" height="420" fill="url(#shine)" transform="skewX(-18)"/></g>
-      <ellipse cx="300" cy="118" rx="150" ry="24" fill="url(#tg2)"/>
-      <ellipse cx="300" cy="118" rx="128" ry="15" fill="#7a4c0c" opacity=".55"/>
-      <path d="M300 205l17 35 39 5-28 27 7 38-35-18-35 18 7-38-28-27 39-5z" fill="#fff7d6" opacity=".95"/>
-      <path d="M268 428h64l-10 92h-44z" fill="url(#tg)"/>
-      <ellipse cx="300" cy="470" rx="34" ry="12" fill="url(#tg2)"/>
-      <path d="M205 520h190l34 62H171z" fill="url(#tg)"/>
-      <rect x="140" y="582" width="320" height="150" rx="14" fill="#06173d" stroke="url(#tg)" stroke-width="7"/>
-      <image href="img/logo-associacao-volvo.png" x="168" y="618" width="264" height="29" preserveAspectRatio="xMidYMid meet"/>
-      <text x="300" y="690" text-anchor="middle" fill="#f2b632" font-family="Montserrat, Arial" font-weight="800" font-size="24" letter-spacing="5">MELHORES DO ANO</text>
-      <text x="300" y="718" text-anchor="middle" fill="#ffffff" font-family="Montserrat, Arial" font-weight="900" font-size="22" letter-spacing="6">2026</text>
+      <g class="starfaces">${facets}</g>
+      <path d="M${pts}Z" fill="url(#sg)"/>
+      <g clip-path="url(#starclip)"><rect class="shinebar" x="-200" y="-40" width="120" height="700" fill="url(#shine)" transform="skewX(-18)"/></g>
+      <path d="M${pts}Z" fill="none" stroke="#ffe9a8" stroke-width="3" stroke-linejoin="round" opacity=".85"/>
     </svg>`;
+  })();
 
   const R = {
     cover: s => `
@@ -66,9 +75,11 @@
           <div class="h1 rv" ${d(1)}>${s.title.map(esc).join('<br>')}</div>
           <div class="tag rv" ${d(3)}>${esc(s.tag)}</div>
         </div>
-        <div class="trophy-wrap zoomIn" ${d(2)}>
+        <div class="trophy-wrap star-wrap zoomIn" ${d(2)}>
           <div class="trophy-rays"></div><div class="trophy-glow"></div>
-          ${TROPHY}
+          <div class="flare h"></div><div class="flare v"></div>
+          ${STAR}
+          <div class="star-core"></div>
           <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i><i class="spark s4"></i><i class="spark s5"></i>
         </div>
       </div>`,
@@ -85,13 +96,14 @@
       const items = s.items.map((it, i) => `
         <div class="item rv${it[0] ? '' : ' plain'}" ${d(i + 2)}>${it[0] && it[0].startsWith('ic:')
           ? `<span class="ic sport">${icon(it[0].slice(3))}</span>`
-          : it[0] && it[0].startsWith('img/') ? `<img class="thumb" src="${it[0]}" alt="">` : ''}
+          : it[0] && it[0].startsWith('img/') ? `<img class="thumb" src="${it[0]}" alt="">`
+          : it[0] === '?' ? '<span class="thumb ph">?</span>' : ''}
           <span><span class="t">${esc(it[1])}</span>${it[2] ? `<br><span class="n">${esc(it[2])}</span>` : ''}</span></div>`).join('');
       const head = `${K(s.kicker)}<div class="h2 rv" ${d(1)}>${esc(s.title)}</div>`;
       if (s.variant === 'sports') return `
         <div class="listhead">${`<div>${head}</div>`}${s.cta ? `<button class="cta rv" ${d(4)} data-next><i>▶</i>${esc(s.cta)}</button>` : ''}</div>
         <div class="items sportsgrid">${items}</div>`;
-      return `${head}<div class="items ${s.variant === 'grid' ? 'g3' : s.variant === 'dense' ? 'g3 dense' : ''}">${items}</div>`;
+      return `${head}<div class="items ${s.variant === 'grid' ? 'g3' : s.variant === 'dense' ? 'g3 dense' : s.variant === 'photos' ? 'g3 photos' : ''}">${items}</div>`;
     },
 
     video: s => `
@@ -100,10 +112,9 @@
       </div>`,
 
     photo: s => `
-      <div class="photoslide">
-        <div>${K(s.kicker)}<div class="h2 rv" ${d(1)}>${esc(s.title)}</div>
-          <div class="lead rv" ${d(2)} style="font-size:34px;color:var(--muted);margin-top:30px;font-weight:600">Obrigado a cada pessoa que fez 2026 acontecer.</div></div>
-        <div class="bigframe zoomIn" ${d(2)} style="height:780px"><img src="${pic(s, 1.28)}" alt="${esc(s.title)}"></div>
+      <div class="photoslide top">
+        <div class="h2 rv" ${d(1)}>${esc(s.title)}</div>
+        <div class="bigframe zoomIn" ${d(2)}><img src="${pic(s, 1.28)}" alt="${esc(s.title)}"></div>
       </div>`,
 
     divider: s => `
@@ -151,7 +162,7 @@
         return `
           <div class="plate2 ${silver ? 'silver' : 'gold'} rv" style="--d:${(0.45 + i * 0.12).toFixed(2)}s">
             <div class="medal"><b>${p.place}º</b><small>LUGAR</small></div>
-            <div class="pt"><div class="nm">${esc(p.name)}</div><div class="dt">${esc(p.detail)}</div></div>
+            <div class="pt"><div class="nm${p.name.includes('\n') ? ' two' : ''}">${esc(p.name).replace(/\n/g, '<br>')}</div><div class="dt">${esc(p.detail)}</div></div>
             <div class="lbl">${silver ? 'VICE' : 'CAMPEÃO'}</div>
           </div>`;
       }).join('');
@@ -210,6 +221,7 @@
     const k = Math.min(innerWidth / 1920, innerHeight / 1080);
     stage.style.transform = `translate(-50%, -50%) scale(${k})`;
     stage.style.transformOrigin = 'center center';
+    document.documentElement.style.setProperty('--k', k); // tamanho do logo do rodapé acompanha a tela
   }
   addEventListener('resize', fit); fit();
 

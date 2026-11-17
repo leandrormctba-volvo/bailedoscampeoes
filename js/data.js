@@ -14,11 +14,11 @@ window.DECK = [
   { type: 'numbers',
     title: 'O ano em números',
     items: [
-      { n: 10, label: 'modalidades esportivas', sub: 'campeonatos, torneios e rankings' },
+      { n: 9, label: 'modalidades esportivas', sub: 'campeonatos, torneios e rankings' },
       { n: 17, label: 'atividades e eventos', sub: 'bailes, festas, cursos e aulas' },
       { n: 11, label: 'melhorias na estrutura', sub: 'reformas e novos espaços' },
-      { n: 15, label: 'modalidades premiadas', sub: '9 individuais/duplas + 6 coletivas' },
-      { n: 35, label: 'atletas premiados', sub: 'em modalidades individuais e duplas' },
+      { n: 13, label: 'modalidades premiadas', sub: '7 individuais/duplas + 6 coletivas' },
+      { n: 32, label: 'atletas premiados', sub: 'em modalidades individuais e duplas' },
       { n: 6,  label: 'equipes campeãs', sub: 'basquete, futsal, fut-7 e vôlei' }
     ] },
 
@@ -28,7 +28,7 @@ window.DECK = [
     items: [
       ['ic:volei', 'Campeonato de Vôlei'], ['ic:futsal', 'Campeonato de Futsal'], ['ic:fut7', 'Campeonato de Fut-7'],
       ['ic:basquete', 'Torneio de Basquete'], ['ic:xadrez', 'Torneios de Xadrez'], ['ic:tenis', 'Torneios de Tênis'],
-      ['ic:truco', 'Ranking de Truco — 1º e 2º turnos'], ['ic:poker', 'Poker'], ['ic:futevolei', 'Futevôlei'], ['ic:bola8', 'Torneios de Bola Oito']
+      ['ic:truco', 'Ranking de Truco — 1º e 2º turnos'], ['ic:poker', 'Poker'], ['ic:futevolei', 'Futevôlei']
     ],
     cta: 'Assistir ao vídeo' },
 
@@ -65,26 +65,25 @@ window.DECK = [
       ['', 'Sistema de câmeras em todo o clube'], ['', 'Novo piso e brinquedos no parquinho do Soccer']
     ] },
 
-  { type: 'list', variant: 'grid',
+  { type: 'list', variant: 'photos',
     title: 'Próximos passos',
+    // '?' = espaço reservado para a foto. Para colocar a foto, troque '?' pelo caminho, ex.: 'img/proximos/app.jpg'
     items: [
-      ['', 'Novo App da Associação'], ['', 'Nova Churrasqueira'], ['', 'Nova Academia e Administrativo'],
-      ['', 'Salas de Lutas'], ['', 'Ballet'], ['', 'Jogos'],
-      ['', 'Novas Excursões'], ['', 'Colônias de Férias'], ['', 'Cosplay — 21/04']
+      ['?', 'Novo App da Associação'], ['?', 'Nova Churrasqueira'], ['?', 'Nova Academia e Administrativo'],
+      ['?', 'Salas de Lutas'], ['?', 'Ballet'], ['?', 'Jogos'],
+      ['?', 'Novas Excursões'], ['?', 'Colônias de Férias'], ['?', 'Cosplay — 21/04']
     ] },
 
   { type: 'photo',
     title: 'Nosso time',
     img: 'img/nosso-time.webp' },  // foto da equipe da Associação Volvo
 
+
   { type: 'divider',
     title: 'Modalidades',
     sub: 'Individuais ou duplas',
-    list: ['Bola 8', 'Corrida Rústica', 'Tênis', 'Poker', 'Beach Tennis', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez'],
+    list: ['Corrida Rústica', 'Tênis', 'Poker', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez'],
     img: 'img/abertura-individuais.jpg' },
-
-  { type: 'champs', group: 'Individuais', sport: 'Bola 8', photo: F('bola8'),
-    people: [{ name: 'Rodrigo Oliveira “Banana”', detail: '1ª etapa', place: 1 }] },
 
   { type: 'race', group: 'Individuais', sport: 'Corrida Rústica', stage: 'Etapa Volvo',
     img: F('corrida'),
@@ -122,9 +121,6 @@ window.DECK = [
       { name: 'Ricardo Santos', detail: 'Campeão · 1º semestre', place: 1 },
       { name: 'Cristiano Schuh', detail: 'Vice-campeão · 1º e 2º semestres', place: 2 } ] },
 
-  { type: 'champs', group: 'Duplas', sport: 'Beach Tennis', photo: F('beach'),
-    people: [{ name: 'Caren Alves e Juliana Lima', detail: 'Dupla campeã', place: 1 }] },
-
   { type: 'champs', group: 'Duplas', sport: 'Futevôlei', photo: F('futevolei'),
     people: [
       { name: 'Christian e Kaue', detail: 'Categoria Ouro', place: 1 },
@@ -135,7 +131,7 @@ window.DECK = [
     people: [{ name: 'Lucas Santos e Alfredo Stahnke Jr', detail: 'Dupla campeã', place: 1 }] },
 
   { type: 'champs', group: 'Duplas', sport: 'Truco', photo: F('truco'),
-    people: [{ name: 'Sergio Wambier e Genésio Aparecido da Silva', detail: 'Dupla campeã', place: 1 }] },
+    people: [{ name: 'Sergio Wambier\nGenésio Aparecido da Silva', detail: 'Dupla campeã', place: 1 }] },
 
   { type: 'champs', group: 'Individuais', sport: 'Xadrez', stage: '2ª etapa', photo: F('xadrez'),
     people: [
