@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none" stroke="#bfeff2" stroke-width="4" stroke-linecap="round">
+  <!-- Linhas de quadra (para fundo, usar com opacidade baixa) -->
+  <g transform="rotate(-6 960 540)">
+    <!-- contorno e meio da quadra -->
+    <rect x="120" y="150" width="1680" height="780"/>
+    <line x1="960" y1="150" x2="960" y2="930"/>
+    <circle cx="960" cy="540" r="150"/>
+    <circle cx="960" cy="540" r="10" fill="#bfeff2"/>
+    <!-- garrafão e linha de 3 (esquerda) -->
+    <rect x="120" y="400" width="320" height="280"/>
+    <path d="M440 400 A 140 140 0 0 1 440 680"/>
+    <path d="M120 200 H260 A 340 340 0 0 1 260 880 H120"/>
+    <!-- garrafão e linha de 3 (direita) -->
+    <rect x="1480" y="400" width="320" height="280"/>
+    <path d="M1480 400 A 140 140 0 0 0 1480 680"/>
+    <path d="M1800 200 H1660 A 340 340 0 0 0 1660 880 H1800"/>
+  </g>
+</svg>

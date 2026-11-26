@@ -18,9 +18,9 @@ body::before { content: ''; position: fixed; inset: 0; pointer-events: none;
     radial-gradient(60% 70% at 85% 15%, rgba(242,182,50,.16), transparent 60%),
     radial-gradient(55% 65% at 15% 90%, rgba(40,160,170,.28), transparent 60%),
     linear-gradient(155deg, #1a6474 0%, #0e4351 35%, #08303b 65%, #041c24 100%); }
-/* desenhos de esporte transparentes ao fundo (bolas, quadra, campo, raquete) */
-body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .11;
-  background: url('../img/esportes-fundo.svg') center / cover no-repeat; animation: o2drift 40s ease-in-out infinite alternate; }
+/* só as linhas de uma quadra esportiva ao fundo, bem suaves */
+body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .06;
+  background: url('../img/quadra-fundo.svg') center / cover no-repeat; animation: o2drift 40s ease-in-out infinite alternate; }
 @keyframes o2drift { from { transform: scale(1); } to { transform: scale(1.06) translate(-1%, -1%); } }
 
 /* Títulos: condensados, retos, com barra dourada */
@@ -84,3 +84,18 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opac
 
 /* Final */
 .t-final .h1 { font-family: var(--title); }
+
+/* Capa: título no canto superior esquerdo e estrela no canto inferior direito */
+.t-cover .cover { position: absolute; inset: 0; display: block; padding: 0; }
+.t-cover .cover > div:first-child { position: absolute; left: 120px; top: 90px; text-align: left; }
+.t-cover .cover .h1 { margin-top: 0; }
+.t-cover .star-wrap { position: absolute; right: 30px; bottom: 30px; width: 640px; height: 640px; }
+.t-cover .star-svg { width: 440px; }
+.t-cover .star-wrap .trophy-rays { width: 1100px; height: 1100px; margin: -550px 0 0 -550px; }
+.t-cover .star-wrap .trophy-glow { width: 600px; height: 600px; margin: -300px 0 0 -300px; }
+.t-cover .flare.h { width: 700px; margin-left: -350px; }
+.t-cover .flare.v { height: 560px; margin-top: -280px; }
+/* celular em pé: mesmo conceito */
+.portrait .t-cover .cover > div:first-child { left: 64px; top: 130px; text-align: left; }
+.portrait .t-cover .cover .h1, .portrait .t-cover .cover .tag { font-size: 170px; }
+.portrait .t-cover .star-wrap { right: 0; bottom: 120px; width: 640px; height: 640px; }
