@@ -217,8 +217,15 @@
 
   // escala do palco
   const stage = document.getElementById('stage');
+  // celular em pé: palco vertical (1080 de largura, altura conforme a tela) com layout empilhado
+  let SW = 1920, SH = 1080;
   function fit() {
-    const k = Math.min(innerWidth / 1920, innerHeight / 1080);
+    const portrait = innerHeight > innerWidth * 1.1;
+    document.documentElement.classList.toggle('portrait', portrait);
+    if (portrait) { SW = 1080; SH = Math.round(Math.min(2400, Math.max(1600, 1080 * innerHeight / innerWidth))); }
+    else { SW = 1920; SH = 1080; }
+    stage.style.width = SW + 'px'; stage.style.height = SH + 'px';
+    const k = Math.min(innerWidth / SW, innerHeight / SH);
     stage.style.transform = `translate(-50%, -50%) scale(${k})`;
     stage.style.transformOrigin = 'center center';
     document.documentElement.style.setProperty('--k', k); // tamanho do logo do rodapé acompanha a tela
@@ -239,24 +246,25 @@
   const cf = document.getElementById('confetti'), cx = cf.getContext('2d');
   let bits = [], cfRun = false;
   function confetti() {
+    if (cf.width !== SW || cf.height !== SH) { cf.width = SW; cf.height = SH; }
     const cols = ['#f2b632', '#ffe08a', '#ffffff', '#2f8fe8', '#c98b1c'];
     for (let i = 0; i < 160; i++) bits.push({
-      x: 960 + (Math.random() - .5) * 400, y: 380, vx: (Math.random() - .5) * 26, vy: -10 - Math.random() * 18,
+      x: SW / 2 + (Math.random() - .5) * 400, y: SH * .35, vx: (Math.random() - .5) * 26, vy: -10 - Math.random() * 18,
       w: 8 + Math.random() * 10, h: 5 + Math.random() * 6, r: Math.random() * 6, vr: (Math.random() - .5) * .4,
       c: cols[i % cols.length], life: 0
     });
     if (!cfRun) { cfRun = true; requestAnimationFrame(cfStep); }
   }
   function cfStep() {
-    cx.clearRect(0, 0, 1920, 1080);
-    bits = bits.filter(b => b.y < 1150 && b.life < 260);
+    cx.clearRect(0, 0, cf.width, cf.height);
+    bits = bits.filter(b => b.y < SH + 70 && b.life < 260);
     for (const b of bits) {
       b.life++; b.vy += .45; b.vx *= .985; b.x += b.vx; b.y += b.vy; b.r += b.vr;
       cx.save(); cx.translate(b.x, b.y); cx.rotate(b.r); cx.fillStyle = b.c;
       cx.globalAlpha = Math.max(0, 1 - b.life / 260);
       cx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h * Math.abs(Math.cos(b.life / 8))); cx.restore();
     }
-    if (bits.length) requestAnimationFrame(cfStep); else { cfRun = false; cx.clearRect(0, 0, 1920, 1080); }
+    if (bits.length) requestAnimationFrame(cfStep); else { cfRun = false; cx.clearRect(0, 0, cf.width, cf.height); }
   }
 
   // navegação

@@ -422,3 +422,71 @@ button { font: inherit; color: inherit; }
 .plates .plate2 .nm.two { font-size: 40px; line-height: 1.15; white-space: nowrap; }
 .t-final .h1 { padding-top: .14em; line-height: 1.05; }
 .t-final .bgimg { left: 40%; }
+
+/* ===== Celular em pé (palco vertical 1080 × altura da tela) ===== */
+.portrait .slide { padding: 120px 64px 150px; }
+.portrait .h2 { font-size: 84px; }
+.portrait .h1 { font-size: 120px; }
+/* capa */
+.portrait .cover { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 0; padding-top: 40px; }
+.portrait .cover .h1, .portrait .cover .tag { font-size: 150px; }
+.portrait .star-wrap { width: 900px; height: 860px; order: -1; }
+.portrait .star-svg { width: 560px; }
+/* números */
+.portrait .numgrid { grid-template-columns: 1fr 1fr; gap: 24px; }
+.portrait .stat { padding: 28px 30px; }
+.portrait .stat b { font-size: 104px; }
+.portrait .stat .l { font-size: 28px; }
+/* listas */
+.portrait .listhead { flex-direction: column; align-items: flex-start; gap: 26px; }
+.portrait .items.sportsgrid { grid-template-columns: 1fr; gap: 18px; }
+.portrait .items.sportsgrid .item { min-height: 104px; }
+.portrait .items.sportsgrid .item .t { font-size: 38px; }
+.portrait .items.g3, .portrait .items.dense { grid-template-columns: 1fr 1fr; gap: 16px; }
+.portrait .items.dense .item { min-height: 120px; }
+.portrait .items.dense .item .t { font-size: 26px; }
+.portrait .items.photos { grid-template-columns: 1fr; gap: 16px; }
+.portrait .items.photos .item { min-height: 130px; padding: 10px 24px 10px 10px; }
+.portrait .items.photos .item .thumb { width: 112px; height: 112px; font-size: 58px; }
+.portrait .items.photos .item .t { font-size: 36px; }
+/* vídeo */
+.portrait .t-video { padding: 120px 40px 150px; }
+.portrait .vmain.big { width: 1000px; }
+/* nosso time */
+.portrait .photoslide.top { padding-top: 120px; gap: 50px; }
+.portrait .photoslide.top .bigframe { width: 100%; height: auto; aspect-ratio: 4/3; }
+/* aberturas */
+.portrait .t-divider { padding: 0; }
+.portrait .t-divider .bgimg { opacity: .3; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 60%); mask-image: linear-gradient(180deg, transparent 0%, #000 60%); }
+.portrait .t-divider .txt { left: 64px; right: 64px; top: 160px; }
+.portrait .t-divider .h1 { font-size: 118px; }
+.portrait .mlist { grid-template-columns: 1fr; width: 100%; }
+.portrait .mlist span { font-size: 58px; }
+/* campeões */
+.portrait .champs .top { flex-direction: column; align-items: flex-start; gap: 18px; }
+.portrait .champs .h2 { font-size: 84px; }
+.portrait .cpbody { grid-template-columns: 1fr; gap: 40px; align-content: start; padding: 40px 0 0; }
+.portrait .cpphoto { height: 560px; }
+.portrait .plate2 .nm.two { white-space: normal; }
+.portrait .plate2 .nm { font-size: 36px; }
+.portrait .plates.n1 .nm { font-size: 44px; }
+/* corrida */
+.portrait .race { grid-template-columns: 1fr; gap: 10px; height: auto; }
+.portrait .race .bigframe { height: 440px !important; }
+.portrait .race > div:last-child { padding-top: 20px !important; }
+/* equipes */
+.portrait .teamslide { grid-template-columns: 1fr; gap: 40px; height: auto; align-content: start; }
+.portrait .teamframe { height: 800px; margin-top: 0; order: 2; }
+.portrait .teamname { font-size: 110px; }
+/* parabéns */
+.portrait .t-final .bgimg { left: 0; top: 46%; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 40%); mask-image: linear-gradient(180deg, transparent 0%, #000 40%); }
+.portrait .t-final .txt { justify-content: flex-start; padding: 300px 64px 0; }
+.portrait .t-final .h1 { font-size: 170px; }
+.portrait .t-final .sub { font-size: 56px; }
+.portrait .t-final .tag { font-size: 28px; letter-spacing: .2em; }
+/* celular em pé: conteúdo centralizado na altura (sem sobrar espaço vazio embaixo) */
+.portrait .slide:not(.t-divider):not(.t-final):not(.t-champs) { display: flex; flex-direction: column; justify-content: center; }
+.portrait .slide > .photoslide.top, .portrait .slide > .race, .portrait .slide > .teamslide, .portrait .slide > .cover { flex: none; }
+.portrait .photoslide.top { padding-top: 0; }
+.portrait .t-final .txt { padding-top: 640px; }
+.portrait .t-divider .txt { top: 260px; }
