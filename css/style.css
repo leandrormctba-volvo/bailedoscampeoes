@@ -525,3 +525,9 @@ button { font: inherit; color: inherit; }
 .racecol h3 { font-size: 36px; margin-bottom: 8px; }
 .race .h2 { font-size: 76px; }
 .race .bigframe { height: 540px !important; margin-top: 30px; }
+
+/* v7: 3º lugar (bronze) nas placas de campeão */
+.plate2.bronze { background: linear-gradient(100deg, rgba(200,121,58,.18), rgba(255,255,255,.05)); border-color: rgba(200,121,58,.55); }
+.plate2.bronze .medal { color: #3a1c06; background: radial-gradient(circle at 35% 30%, #ffd9b0, #c8793a 45%, #7a4318); }
+.plate2.bronze .dt { color: #e0a26c; }
+.plate2.bronze .lbl { background: #c8793a; color: #2a1404; }

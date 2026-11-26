@@ -161,12 +161,12 @@
     champsPhoto: s => {
       const n = s.people.length;
       const plates = s.people.map((p, i) => {
-        const silver = p.place === 2;
+        const silver = p.place === 2, bronze = p.place === 3;
         return `
-          <div class="plate2 ${silver ? 'silver' : 'gold'} rv" style="--d:${(0.45 + i * 0.12).toFixed(2)}s">
+          <div class="plate2 ${bronze ? 'bronze' : silver ? 'silver' : 'gold'} rv" style="--d:${(0.45 + i * 0.12).toFixed(2)}s">
             <div class="medal"><b>${p.place}º</b><small>LUGAR</small></div>
             <div class="pt"><div class="nm${p.name.includes('\n') ? ' two' : ''}">${esc(p.name).replace(/\n/g, '<br>')}</div><div class="dt">${esc(p.detail)}</div></div>
-            <div class="lbl">${silver ? 'VICE' : 'CAMPEÃO'}</div>
+            <div class="lbl">${bronze ? '3º LUGAR' : silver ? 'VICE' : 'CAMPEÃO'}</div>
           </div>`;
       }).join('');
       return `

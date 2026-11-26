@@ -96,7 +96,7 @@ window.DECK = [
   { type: 'divider',
     title: 'Modalidades',
     sub: 'Individuais ou duplas',
-    list: ['Corrida AV', 'Tênis', 'Poker', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez'],
+    list: ['Corrida AV', 'Tênis', 'Poker', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez', 'Tênis de Mesa'],
     img: 'img/abertura-individuais.jpg' },
 
   // linhas: [nome, categoria, colocação]
@@ -119,19 +119,31 @@ window.DECK = [
         ['Gabriella Gonchorovski dos Santos', 'Feminino', 3] ] }
     ] },
 
-  { type: 'champs', group: 'Individuais', sport: 'Tênis', stage: '1ª etapa', photo: F('tenis'),
-    people: [
-      { name: 'Juliano Rocha', detail: 'Classe A', place: 1 },
-      { name: 'Maison Grande', detail: 'Classe B', place: 1 },
-      { name: 'Edinaldo Martins', detail: 'Classe C', place: 1 },
-      { name: 'Wagner Stroparo', detail: 'Classe D', place: 1 },
-      { name: 'Mauricio Pelini', detail: 'Classe B', place: 2 } ] },
+  { type: 'race', group: 'Individuais', sport: 'Tênis de Campo', stage: '2026',
+    img: F('tenis'),
+    cols: [
+      { title: 'Masculino', rows: [
+        ['José Carlos Oliveira Junior', 'Campeão', 1],
+        ['Marco Paiano', 'Vice-campeão', 2],
+        ['Juliano Rocha', '3º lugar', 3] ] },
+      { title: 'Feminino', rows: [
+        ['Cibele Gabardo', 'Campeã', 1],
+        ['Rafaela Novaski Morges', 'Vice-campeã', 2],
+        ['Sara Veiga', '3º lugar', 3] ] }
+    ] },
 
-  { type: 'champs', group: 'Individuais', sport: 'Tênis', stage: '2ª etapa', photo: F('tenis2'),
-    people: [
-      { name: 'Daniel Zanotto', detail: 'Classe B', place: 1 },
-      { name: 'Thiago Rudol', detail: 'Classe D', place: 1 },
-      { name: 'Lucas Beghini', detail: 'Classe A', place: 2 } ] },
+  { type: 'race', group: 'Individuais', sport: 'Tênis de Mesa', stage: '2026',
+    img: 'img/tenis-de-mesa.svg',
+    cols: [
+      { title: 'Masculino', rows: [
+        ['Marcelo Silva', 'Campeão', 1],
+        ['Bruno Firakoski', 'Vice-campeão', 2],
+        ['Fabio Augusto Ribeiro', '3º lugar', 3] ] },
+      { title: 'Feminino', rows: [
+        ['Manoela Arantes', 'Campeã', 1],
+        ['Cibele Gabardo', 'Vice-campeã', 2],
+        ['Sara Veiga', '3º lugar', 3] ] }
+    ] },
 
   { type: 'champs', group: 'Individuais', sport: 'Poker', photo: F('poker2'),
     people: [
@@ -141,20 +153,24 @@ window.DECK = [
 
   { type: 'champs', group: 'Duplas', sport: 'Futevôlei', photo: F('futevolei'),
     people: [
-      { name: 'Christian e Kauê', detail: 'Categoria Ouro', place: 1 },
-      { name: 'Ander e Alexandre', detail: 'Categoria Prata', place: 1 },
-      { name: 'Bruna e Clevinho', detail: 'Categoria Mista', place: 1 } ] },
+      { name: 'Ander Correia', detail: 'Categoria Ouro', place: 1 },
+      { name: 'Reinaldo Stocki\nDanniel Braga', detail: 'Categoria Prata', place: 1 },
+      { name: 'Bruna Dias Costa\nCleverton Skrypietz', detail: 'Dupla Mista', place: 1 } ] },
 
   { type: 'champs', group: 'Duplas', sport: 'Vôlei de Areia', photo: F('areia'),
     people: [{ name: 'Lucas Santos e Alfredo Stahnke Jr', detail: 'Dupla campeã', place: 1 }] },
 
   { type: 'champs', group: 'Duplas', sport: 'Truco', photo: F('truco'),
-    people: [{ name: 'Sergio Wambier\nGenésio Silva', detail: 'Dupla campeã', place: 1 }] },
+    people: [
+      { name: 'Altevir e Rogério', detail: 'Dupla campeã', place: 1 },
+      { name: 'Alex', detail: 'Vice-campeão', place: 2 },
+      { name: 'Dilton e Donizete', detail: '3º lugar', place: 3 } ] },
 
   { type: 'champs', group: 'Individuais', sport: 'Xadrez', photo: F('xadrez'),
     people: [
-      { name: 'Juliano Santos', detail: 'Campeão', place: 1 },
-      { name: 'Everson Machado', detail: 'Vice-campeão', place: 2 } ] },
+      { name: 'Eduardo Seiti', detail: 'Campeão', place: 1 },
+      { name: 'Juliano dos Santos Rocha', detail: 'Vice-campeão', place: 2 },
+      { name: 'João Vitor Cararo Cano', detail: '3º lugar', place: 3 } ] },
 
   { type: 'divider',
     title: 'Modalidades',
@@ -162,13 +178,17 @@ window.DECK = [
     list: ['Basquete 3x3', 'Futsal Feminino', 'Futsal Masculino', 'Fut-7', 'Vôlei Feminino', 'Vôlei Masculino'],
     img: 'img/abertura-coletivas.jpg' },
 
-  { type: 'team', sport: 'Basquete 3x3', team: 'Coroinhas', img: F('basquete') },
+  { type: 'team', sport: 'Basquete 3x3', team: 'Coroinhas', img: F('basquete'),
+    members: ['Luiz Henrique Gomes de Brito', 'Luiz Henrique Moreira Fonseca', 'Jefferson Oliveira',
+      'Manoela Arantes', 'Rosana Gagliassi', 'Ana Paula Paludo'] },
   { type: 'team', sport: 'Futsal Feminino', team: 'Campeãs', img: F('futfem'),
     members: ['Aline Dutra', 'Jaqueline Moreira', 'Nathali Veiga', 'Sara Veiga', 'Taiana Santos'] },
   { type: 'team', sport: 'Futsal Masculino', team: 'Powertrain', img: F('futmasc') },
   { type: 'team', sport: 'Fut-7', team: 'Alemanha', img: F('copa') },
   { type: 'team', sport: 'Vôlei Feminino', team: 'Haiti', img: F('volei') },
-  { type: 'team', sport: 'Vôlei Masculino', team: 'Brasil', img: F('volmasc') },
+  { type: 'team', sport: 'Vôlei Masculino', team: 'Brasil', img: F('volmasc'),
+    members: ['Alexsandro Vargas', 'Lucas Afonso', 'Bruno Bastos', 'Eber', 'Jadson', 'Johanson',
+      'Kauan', 'Luizão', 'Mateus', 'Muryllo', 'Pedro'] },
 
   { type: 'final',
     title: 'Parabéns',
