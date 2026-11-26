@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Banner 5 x 3 (pista de atletismo) — Melhores do Ano AV 2026</title>
+<!-- Banner para impressão: proporção 5 x 3 (ex.: 5 m de largura por 3 m de altura).
+     Versão C: fundo com linhas de pista de atletismo; logo Associação Volvo no meio em cima,
+     estrela no canto inferior direito e o centro livre para fotos. -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+  @page { size: 2000px 1200px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2000px; height: 1200px; overflow: hidden; background: #062a33; color: #fff; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .art { position: relative; width: 2000px; height: 1200px; overflow: hidden;
+    background:
+      radial-gradient(55% 65% at 18% 25%, rgba(40,150,165,.45), transparent 65%),
+      radial-gradient(50% 60% at 88% 88%, rgba(242,182,50,.22), transparent 65%),
+      radial-gradient(40% 50% at 70% 8%, rgba(20,100,115,.5), transparent 70%),
+      linear-gradient(150deg, #1a6474 0%, #0e4351 38%, #08303b 68%, #041c24 100%); }
+  /* linhas de uma pista de atletismo, bem suaves (desenhadas no script abaixo) */
+  .track { position: absolute; inset: 0; opacity: .12; } .track svg { width: 100%; height: 100%; display: block; }
+  .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(2,14,18,.5)); }
+
+  /* logo no meio, em cima */
+  .logo { position: absolute; left: 50%; top: 84px; transform: translateX(-50%); width: 490px; z-index: 3;
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.4)); }
+
+  /* título no canto superior esquerdo */
+  .title { position: absolute; left: 80px; top: 62px; z-index: 3; font-family: 'Anton', Impact, sans-serif; font-weight: 400;
+    text-transform: uppercase; font-size: 100px; line-height: .98; letter-spacing: .01em; text-shadow: 0 10px 40px rgba(0,0,0,.35); }
+  .title .av { display: block; color: #f2b632; }
+  .title .bar { display: block; width: 160px; height: 10px; margin-top: 22px; background: linear-gradient(90deg, #f2b632 0 70%, transparent 70% 78%, #3fb5bf 78%); transform: skewX(-30deg); }
+
+  /* listras douradas no canto inferior esquerdo, discretas */
+  .stripes { position: absolute; left: -40px; bottom: -40px; width: 460px; height: 230px; opacity: .35;
+    background: repeating-linear-gradient(55deg, transparent 0 34px, rgba(242,182,50,.6) 34px 44px);
+    -webkit-mask-image: linear-gradient(225deg, transparent 30%, #000 85%); mask-image: linear-gradient(225deg, transparent 30%, #000 85%); }
+
+  /* estrela no canto inferior direito */
+  .glow { position: absolute; right: -120px; bottom: -180px; width: 960px; height: 960px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,226,140,.55), rgba(242,182,50,.16) 40%, transparent 68%); }
+  .rays { position: absolute; right: -630px; bottom: -700px; width: 1900px; height: 1900px; opacity: .35;
+    background: repeating-conic-gradient(from 0deg, rgba(242,182,50,.9) 0deg 3deg, transparent 3deg 15deg);
+    -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 42%); mask-image: radial-gradient(circle, #000 0%, transparent 42%); }
+  .flare { position: absolute; border-radius: 50%; mix-blend-mode: screen; }
+  .flare.h { right: -60px; bottom: 246px; width: 860px; height: 10px; background: radial-gradient(ellipse, rgba(255,250,225,.95), rgba(255,214,120,.35) 35%, transparent 70%); }
+  .flare.v { right: 316px; bottom: -40px; width: 10px; height: 640px; background: radial-gradient(ellipse, rgba(255,250,225,.9), rgba(255,214,120,.3) 35%, transparent 70%); }
+  #star { position: absolute; right: 100px; bottom: 50px; width: 440px; height: 440px; transform: rotate(-8deg);
+    filter: drop-shadow(0 0 30px rgba(255,214,110,.8)) drop-shadow(0 26px 44px rgba(0,0,0,.5)); }
+  #star svg { width: 100%; height: 100%; display: block; }
+  .core { position: absolute; right: 275px; bottom: 216px; width: 100px; height: 100px; border-radius: 50%; mix-blend-mode: screen;
+    background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,240,190,.45) 40%, transparent 70%); }
+  .spark { position: absolute; background: #fff7d6; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 8px #ffe08a); }
+</style></head>
+<body><div class="art">
+  <div class="track" id="track"></div>
+  <div class="stripes"></div>
+  <div class="glow"></div><div class="rays"></div>
+  <div class="flare h"></div><div class="flare v"></div>
+  <div id="star"></div>
+  <div class="core"></div>
+  <i class="spark" style="right:600px;bottom:380px;width:30px;height:30px"></i>
+  <i class="spark" style="right:60px;bottom:520px;width:24px;height:24px"></i>
+  <i class="spark" style="right:560px;bottom:90px;width:18px;height:18px"></i>
+  <div class="vignette"></div>
+  <img class="logo" src="../img/logo-associacao-volvo.png" alt="Associação Volvo">
+  <div class="title">Melhores<br>do ano<span class="av">AV 2026</span><span class="bar"></span></div>
+</div>
+<script>
+  // ?z=2 aumenta a arte (para gerar a imagem em alta resolução)
+  const z = parseFloat(new URLSearchParams(location.search).get('z'));
+  if (z) { document.documentElement.style.zoom = z; document.documentElement.style.overflow = 'hidden'; }
+  // pista de atletismo: 8 raias em volta de um gramado, levemente inclinada
+  (function () {
+    const cx = 1000, cy = 610, L = 960, r0 = 220, lane = 34, n = 8;
+    const oval = r => `M${cx - L / 2} ${cy - r}H${cx + L / 2}A${r} ${r} 0 0 1 ${cx + L / 2} ${cy + r}H${cx - L / 2}A${r} ${r} 0 0 1 ${cx - L / 2} ${cy - r}Z`;
+    let s = '';
+    for (let i = 0; i <= n; i++) s += `<path d="${oval(r0 + i * lane)}" stroke-width="${i === 0 || i === n ? 6 : 4}"/>`;
+    // linha de chegada e números das raias (reta de baixo)
+    const fx = cx - 180;
+    s += `<line x1="${fx}" y1="${cy + r0}" x2="${fx}" y2="${cy + r0 + n * lane}" stroke-width="8"/>`;
+    for (let i = 0; i < n; i++)
+      s += `<text x="${fx - 50}" y="${cy + r0 + i * lane + lane / 2 + 9}" font-family="Anton, Impact, sans-serif" font-size="26" fill="#bfeff2" stroke="none" text-anchor="middle">${i + 1}</text>`;
+    // marcas de largada escalonadas (reta de cima)
+    for (let i = 0; i < n; i++) {
+      const x = cx + 120 + i * 28, y = cy - r0 - i * lane;
+      s += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y - lane}" stroke-width="5"/>`;
+    }
+    document.getElementById('track').innerHTML =
+      `<svg viewBox="0 0 2000 1200" fill="none" stroke="#bfeff2" stroke-linecap="round"><g transform="rotate(-7 1000 600)">${s}</g></svg>`;
+  })();
+  // estrela dourada facetada (mesma da capa da apresentação)
+  (function () {
+    const C = 300, R = 280, r = 112, L = [-0.55, -0.83];
+    const P = (a, rad) => [C + rad * Math.cos(a * Math.PI / 180), C + rad * Math.sin(a * Math.PI / 180)];
+    const lo = [96, 56, 6], hi = [255, 246, 205];
+    const col = t => 'rgb(' + lo.map((v, i) => Math.round(v + (hi[i] - v) * t)).join(',') + ')';
+    let facets = '', outline = [];
+    for (let k = 0; k < 5; k++) {
+      const a = -90 + 72 * k, O = P(a, R), Ia = P(a - 36, r), Ib = P(a + 36, r);
+      outline.push(Ia, O);
+      for (const I of [Ia, Ib]) {
+        let nx = -(O[1] - I[1]), ny = O[0] - I[0];
+        const mx = (O[0] + I[0]) / 2 - C, my = (O[1] + I[1]) / 2 - C;
+        if (nx * mx + ny * my < 0) { nx = -nx; ny = -ny; }
+        const n = Math.hypot(nx, ny), t = Math.max(0, Math.min(1, .5 + .55 * ((nx / n) * L[0] + (ny / n) * L[1])));
+        facets += '<path d="M' + C + ' ' + C + 'L' + I.map(v => v.toFixed(1)) + 'L' + O.map(v => v.toFixed(1)) + 'Z" fill="' + col(t) + '"/>';
+      }
+    }
+    const pts = outline.map(p => p.map(v => v.toFixed(1)).join(' ')).join(' L');
+    document.getElementById('star').innerHTML =
+      '<svg viewBox="0 0 600 600"><defs><radialGradient id="sg" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>' +
+      facets + '<path d="M' + pts + 'Z" fill="url(#sg)"/><path d="M' + pts + 'Z" fill="none" stroke="#ffe9a8" stroke-width="3" stroke-linejoin="round" opacity=".85"/></svg>';
+  })();
+</script>
+</body></html>
