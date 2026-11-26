@@ -490,3 +490,38 @@ button { font: inherit; color: inherit; }
 .portrait .photoslide.top { padding-top: 0; }
 .portrait .t-final .txt { padding-top: 640px; }
 .portrait .t-divider .txt { top: 260px; }
+/* Medalhas da corrida: 1º ouro, 2º prata, 3º bronze */
+.runner .md.p2 { color: #1f2a38; background: radial-gradient(circle at 35% 30%, #fff, var(--silver) 45%, #7c8796); }
+.runner .md.p3 { color: #3a1c06; background: radial-gradient(circle at 35% 30%, #ffd9b0, #c8793a 45%, #7a4318); }
+.race .runner { padding: 8px 14px; margin-bottom: 8px; }
+/* Modalidades com 3 colunas e contagem de participantes */
+.items.sportsgrid.g3 { grid-template-columns: repeat(3, 1fr); gap: 16px 20px; margin-top: 34px; }
+.items.sportsgrid.g3 .item { min-height: 120px; padding: 12px 20px; gap: 18px; }
+.items.sportsgrid.g3 .item .t { font-size: 27px; }
+.items.sportsgrid.g3 .item .n { font-size: 18px; margin-top: 6px; }
+.items.sportsgrid.g3 .ic.sport { width: 66px; height: 66px; } .items.sportsgrid.g3 .ic.sport svg { width: 40px; height: 40px; }
+.portrait .items.sportsgrid.g3 { grid-template-columns: 1fr 1fr; gap: 14px; }
+.portrait .items.sportsgrid.g3 .item .t { font-size: 26px; }
+/* Atividades com 10 itens: 2 linhas de 5 */
+.items.dense.c5 { grid-template-columns: repeat(5, 1fr); gap: 22px 20px; margin-top: 60px; }
+.items.dense.c5 .item { min-height: 250px; flex-direction: column; align-items: flex-start; justify-content: center; }
+.items.dense.c5 .item .t { font-size: 28px; }
+.items.dense.c5 .item .n { font-size: 18px; margin-top: 12px; }
+.portrait .items.dense.c5 { grid-template-columns: 1fr 1fr; }
+.portrait .items.dense.c5 .item { min-height: 200px; }
+/* Próximos passos: boxes maiores, segunda linha centralizada */
+.items.photos { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px 28px; margin-top: 60px; }
+.items.photos .item { width: calc((100% - 56px) / 3); min-height: 280px; }
+.items.photos .item .thumb { width: 240px; height: 240px; font-size: 110px; }
+.items.photos .item .t { font-size: 36px; }
+.portrait .items.photos { gap: 18px; }
+.portrait .items.photos .item { width: 100%; min-height: 200px; }
+.portrait .items.photos .item .thumb { width: 170px; height: 170px; font-size: 80px; }
+/* Corrida com 12 nomes (1º, 2º e 3º): lista mais compacta */
+.race .runner { padding: 6px 12px; margin-bottom: 7px; }
+.race .runner b { font-size: 20px; }
+.race .runner span { font-size: 17px; }
+.race .runner .md { width: 40px; height: 40px; font-size: 17px; }
+.racecol h3 { font-size: 36px; margin-bottom: 8px; }
+.race .h2 { font-size: 76px; }
+.race .bigframe { height: 540px !important; margin-top: 30px; }

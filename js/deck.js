@@ -29,6 +29,9 @@
     truco: '<rect x="3.5" y="5" width="10" height="14" rx="2" transform="rotate(-12 8.5 12)"/><rect x="10" y="4" width="10" height="14" rx="2" transform="rotate(10 15 11)"/><path d="M15.2 9.2l1 2 -1 2-1-2z" fill="currentColor"/>',
     poker: '<path d="M12 3.2c2.6 3.6 7 5.8 7 9.6a3.9 3.9 0 0 1-6.3 3.1l1.1 4.6H10.2l1.1-4.6A3.9 3.9 0 0 1 5 12.8c0-3.8 4.4-6 7-9.6z"/>',
     futevolei: '<circle cx="12" cy="7.5" r="4"/><path d="M2 20c3-2 5.5-2 8 0s5 2 8 0c1.4-.9 2.6-1.2 4-1"/><path d="M3 15.5h18" stroke-dasharray="2 2"/>',
+    corrida: '<circle cx="14.5" cy="4.5" r="2"/><path d="M8 21l3-6 3 2v5M6 12l3-4 4 1 3 4h3M11 15l-1-5"/>',
+    pingpong: '<circle cx="9.5" cy="9.5" r="6"/><path d="M13.7 13.7l5.8 5.8"/><circle cx="19" cy="6" r="1.8" fill="currentColor" stroke="none"/>',
+    cartola: '<path d="M7 17V6.5c0-1 2.2-1.8 5-1.8s5 .8 5 1.8V17"/><path d="M3 17.5c0 1.4 4 2.5 9 2.5s9-1.1 9-2.5-4-2.5-9-2.5-9 1.1-9 2.5z"/><path d="M7 13.5c1.5.8 3 1 5 1s3.5-.2 5-1"/>',
     bola8: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="11" r="4.2"/><path d="M12 9.1a.95.95 0 1 1 0 1.9.95.95 0 1 1 0-1.9zM12 11a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 1 1 0-2.2z"/>'
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ''}</svg>`;
@@ -88,7 +91,7 @@
       ${K(s.kicker)}
       <div class="h2 rv" ${d(1)}>${esc(s.title)}</div>
       <div class="numgrid">${s.items.map((it, i) => `
-        <div class="stat rv" ${d(i + 2)}><b class="goldtext" data-count="${it.n}">0</b>
+        <div class="stat rv" ${d(i + 2)}><b class="goldtext" data-count="${it.n}"${it.pre ? ` data-pre="${esc(it.pre)}"` : ''}>0</b>
           <span class="l">${esc(it.label)}</span><span class="s">${esc(it.sub)}</span></div>`).join('')}
       </div>`,
 
@@ -102,8 +105,8 @@
       const head = `${K(s.kicker)}<div class="h2 rv" ${d(1)}>${esc(s.title)}</div>`;
       if (s.variant === 'sports') return `
         <div class="listhead">${`<div>${head}</div>`}${s.cta ? `<button class="cta rv" ${d(4)} data-next><i>▶</i>${esc(s.cta)}</button>` : ''}</div>
-        <div class="items sportsgrid">${items}</div>`;
-      return `${head}<div class="items ${s.variant === 'grid' ? 'g3' : s.variant === 'dense' ? 'g3 dense' : s.variant === 'photos' ? 'g3 photos' : ''}">${items}</div>`;
+        <div class="items sportsgrid${s.items.length > 10 ? ' g3' : ''}">${items}</div>`;
+      return `${head}<div class="items ${s.variant === 'grid' ? 'g3' : s.variant === 'dense' ? 'g3 dense' + (s.items.length === 10 ? ' c5' : '') : s.variant === 'photos' ? 'g3 photos' : ''}">${items}</div>`;
     },
 
     video: s => `
@@ -184,7 +187,7 @@
         <div style="padding-top:40px"><div class="stagepill rv" ${d(2)} style="display:inline-block">${esc(s.stage)}</div>
           <div class="racecols">${s.cols.map((c, ci) => `
             <div class="racecol"><h3 class="rv" ${d(3 + ci)}>${esc(c.title)}</h3>
-              ${c.rows.map((r, ri) => `<div class="runner rv" ${d(4 + ri + ci * 5)}><span class="md">1º</span><span><b>${esc(r[0])}</b><span>${esc(r[1])}</span></span></div>`).join('')}
+              ${c.rows.map((r, ri) => `<div class="runner rv" ${d(4 + ri + ci * 5)}><span class="md p${r[2] || 1}">${r[2] || 1}º</span><span><b>${esc(r[0])}</b><span>${esc(r[1])}</span></span></div>`).join('')}
             </div>`).join('')}</div></div>
       </div>`,
 
@@ -237,7 +240,7 @@
     const to = +el.dataset.count, t0 = performance.now(), dur = 1600;
     (function step(t) {
       const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(to * e);
+      el.textContent = (el.dataset.pre || '') + Math.round(to * e).toLocaleString('pt-BR');
       if (p < 1) requestAnimationFrame(step);
     })(t0);
   }
@@ -374,6 +377,7 @@
   addEventListener('mousemove', wake); wake();
 
   window.__go = n => go(n - 1);
-  go((parseInt(location.hash.slice(1), 10) || 1) - 1);
+  // window.START_AT_BEGINNING (definido no HTML): ao atualizar a página, sempre volta ao slide 1
+  go(window.START_AT_BEGINNING ? 0 : (parseInt(location.hash.slice(1), 10) || 1) - 1);
   }
 })();

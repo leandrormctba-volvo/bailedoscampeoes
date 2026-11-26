@@ -1,9 +1,10 @@
 /* =========================================================
    CONTEÚDO DA APRESENTAÇÃO — Melhores do Ano AV 2026
    Para trocar um nome, foto ou número, edite só este arquivo.
+   Atualizado com o "ROTEIRO FESTA DOS CAMPEÕES 2026".
    ========================================================= */
 // Fotos reais: pasta img/fav (fotos publicadas no site Família AV — familia-av.com).
-// Nas listas, o 1º campo de cada item é a foto (ou '' para mostrar só o número).
+// Nas listas, o 1º campo de cada item é a foto (ou '' para mostrar só o texto).
 const F = n => 'img/fav/' + n + '.jpg';
 
 window.DECK = [
@@ -13,22 +14,35 @@ window.DECK = [
 
   { type: 'numbers',
     title: 'O ano em números',
+    // pre: texto antes do número (ex.: '+')
     items: [
-      { n: 9, label: 'modalidades esportivas', sub: 'campeonatos, torneios e rankings' },
-      { n: 17, label: 'atividades e eventos', sub: 'bailes, festas, cursos e aulas' },
-      { n: 11, label: 'melhorias na estrutura', sub: 'reformas e novos espaços' },
-      { n: 13, label: 'modalidades premiadas', sub: '7 individuais/duplas + 6 coletivas' },
-      { n: 32, label: 'atletas premiados', sub: 'em modalidades individuais e duplas' },
-      { n: 6,  label: 'equipes campeãs', sub: 'basquete, futsal, fut-7 e vôlei' }
+      { n: 45, pre: '+', label: 'anos de história', sub: 'cuidando das pessoas e conectando histórias' },
+      { n: 15, label: 'modalidades esportivas', sub: 'campeonatos, torneios e rankings' },
+      { n: 600, pre: '+', label: 'corredores', sub: 'na Corrida Associação Volvo' },
+      { n: 682, label: 'crianças na Colônia de Férias', sub: 'verão e inverno' },
+      { n: 7000, pre: '+', label: 'pessoas no Arraiá da AV', sub: 'recorde de público' },
+      { n: 5000, pre: '+', label: 'pessoas na Festa das Crianças', sub: 'diversão para toda a família' }
     ] },
 
   { type: 'list', variant: 'sports',
     title: 'Modalidades',
-    // 'ic:nome' = ícone do esporte (lista de ícones em js/deck.js)
+    // 'ic:nome' = ícone do esporte (lista de ícones em js/deck.js); 3º campo = participantes
     items: [
-      ['ic:volei', 'Campeonato de Vôlei'], ['ic:futsal', 'Campeonato de Futsal'], ['ic:fut7', 'Campeonato de Fut-7'],
-      ['ic:basquete', 'Torneio de Basquete'], ['ic:xadrez', 'Torneios de Xadrez'], ['ic:tenis', 'Torneios de Tênis'],
-      ['ic:truco', 'Ranking de Truco — 1º e 2º turnos'], ['ic:poker', 'Poker'], ['ic:futevolei', 'Futevôlei']
+      ['ic:volei', 'Vôlei Masculino', '5 equipes'],
+      ['ic:fut7', 'Fut-7 Masculino', '8 equipes'],
+      ['ic:fut7', 'Fut-7 Feminino', '2 equipes · novidade'],
+      ['ic:fut7', 'Fut-7 Masculino 35+', '6 equipes'],
+      ['ic:futsal', 'Futebol Masculino', '6 equipes'],
+      ['ic:basquete', 'Basquete 3x3 M/F', '5 equipes'],
+      ['ic:xadrez', 'Xadrez', '2 torneios · 24 participantes'],
+      ['ic:tenis', 'Tênis M/F — 3 etapas', '135 participações'],
+      ['ic:truco', 'Ranking de Truco', '91 participantes'],
+      ['ic:poker', 'Poker — 2 rankings', '+ de 100 participantes'],
+      ['ic:futevolei', 'Futevôlei', '+ de 30 participantes'],
+      ['ic:corrida', 'Corrida Associação Volvo', '+ de 600 participantes'],
+      ['ic:pingpong', 'Tênis de Mesa', '41 participantes · novidade'],
+      ['ic:volei', 'Vôlei de Areia M/F', '16 duplas'],
+      ['ic:cartola', 'Cartola', '81 participantes']
     ],
     cta: 'Assistir ao vídeo' },
 
@@ -45,14 +59,16 @@ window.DECK = [
   { type: 'list', variant: 'dense',
     title: 'Atividades',
     items: [
-      ['', 'Colônia de Férias de verão e inverno'], ['', 'Bailes do Hawaii, Gauchesco e Noite do Horror'],
-      ['', 'Karaokê (com banda)'], ['', 'Tardezinha'], ['', 'CozinhaFácil'], ['', 'Festa Julina'],
-      ['', 'Festa das Crianças'], ['', 'Encontro de Carros Antigos'],
-      ['', 'Fazendo Arte, Camarim de pintura'], ['', 'Excursões: Cruzeiro Nordeste, Foz do Iguaçu e Beto Carrero'],
-      ['', 'Passeios ecológicos: Bombinhas, Caverna do Diabo e Morro da Faxina'],
-      ['', 'Cursos de Queijos e Vinhos, Cervejas e Bartender'],
-      ['', 'Escolinha de Futebol', 'Novidade: turmas em dias de semana'], ['', 'Aula de Patins'],
-      ['', 'Aulas de Ballet'], ['', 'Dia das Mães, Dia dos Pais e almoço de Páscoa']
+      ['', 'Colônia de Férias de verão e inverno', '682 crianças'],
+      ['', 'Bailes do Flashback e Noite do Horror', 'média de 400 pessoas'],
+      ['', 'Arraiá da AV', '+ de 7.000 pessoas · recorde'],
+      ['', 'Festa das Crianças', '+ de 5.000 pessoas'],
+      ['', 'Encontro de Carros Antigos (noturno)', '+ de 80 carros'],
+      ['', 'Cozinha Fácil — sushi, pizza, Dia das Crianças e panettone', '4 edições · 222 participantes'],
+      ['', 'Halloween Kids', 'novidade · 110 participantes'],
+      ['', 'Ginástica Rítmica', 'novidade'],
+      ['', 'Fut-7 Feminino', 'novidade'],
+      ['', 'Tênis de Mesa adulto e infanto-juvenil', 'novidade']
     ] },
 
   { type: 'list', variant: 'grid',
@@ -67,39 +83,40 @@ window.DECK = [
 
   { type: 'list', variant: 'photos',
     title: 'Próximos passos',
-    // '?' = espaço reservado para a foto. Para colocar a foto, troque '?' pelo caminho, ex.: 'img/proximos/app.jpg'
+    // '?' = espaço reservado para a foto. Para colocar a foto, troque '?' pelo caminho, ex.: 'img/proximos/academia.jpg'
     items: [
-      ['?', 'Novo App da Associação'], ['?', 'Nova Churrasqueira'], ['?', 'Nova Academia e Administrativo'],
-      ['?', 'Salas de Lutas'], ['?', 'Ballet'], ['?', 'Jogos'],
-      ['?', 'Novas Excursões'], ['?', 'Colônias de Férias'], ['?', 'Cosplay — 21/04']
+      ['?', 'Nova Academia'], ['?', 'Novo Escritório AV'], ['?', 'Evento Cosplay'],
+      ['?', 'Campeonatos'], ['?', 'Excursões Internacionais']
     ] },
 
   { type: 'photo',
     title: 'Nosso time',
     img: 'img/nosso-time.webp' },  // foto da equipe da Associação Volvo
 
-
   { type: 'divider',
     title: 'Modalidades',
     sub: 'Individuais ou duplas',
-    list: ['Corrida Rústica', 'Tênis', 'Poker', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez'],
+    list: ['Corrida AV', 'Tênis', 'Poker', 'Futevôlei', 'Vôlei de Areia', 'Truco', 'Xadrez'],
     img: 'img/abertura-individuais.jpg' },
 
-  { type: 'race', group: 'Individuais', sport: 'Corrida Rústica', stage: 'Etapa Volvo',
+  // linhas: [nome, categoria, colocação]
+  { type: 'race', group: 'Individuais', sport: 'Corrida Associação Volvo', stage: '2026',
     img: F('corrida'),
     cols: [
       { title: '5 km', rows: [
-        ['Camile Fagundes Alves', 'Fem · 17 a 30 anos'],
-        ['Cristiane Walbach de Assis', 'Fem · 45+'],
-        ['Allyf Cihade', 'Masc · 17 a 30 anos'],
-        ['Diogo Machado', 'Masc · 31 a 44 anos'],
-        ['Basílio Fernandes', 'Masc · 45+'] ] },
+        ['Robinilson Costa Martins', 'Masculino', 1],
+        ['Marcos Diego Leandro de Sousa', 'Masculino', 2],
+        ['Fabio de Lima Camargo', 'Masculino', 3],
+        ['Janaina Marcelo Coiado', 'Feminino', 1],
+        ['Erita Joara Pickler', 'Feminino', 2],
+        ['Cristiane Walbach de Assis', 'Feminino', 3] ] },
       { title: '10 km', rows: [
-        ['Isabela Ferreira da Silva', 'Fem · 17 a 24 anos'],
-        ['Letícia dos Santos Lima', 'Fem · 31 a 44 anos'],
-        ['Gustavo Cezar Rabb', 'Masc · 17 a 24 anos'],
-        ['Eliel Sant Ana', 'Masc · 31 a 44 anos'],
-        ['Marcos Antônio Stocco', 'Masc · 45+'] ] }
+        ['Marcos Antonio Stocco', 'Masculino', 1],
+        ['Thiago Marzani da Silva', 'Masculino', 2],
+        ['Fabrício Aparecido Cardozo', 'Masculino', 3],
+        ['Liliane Gonçalves Gomes Wrublewski', 'Feminino', 1],
+        ['Rafaela Moretto', 'Feminino', 2],
+        ['Gabriella Gonchorovski dos Santos', 'Feminino', 3] ] }
     ] },
 
   { type: 'champs', group: 'Individuais', sport: 'Tênis', stage: '1ª etapa', photo: F('tenis'),
@@ -118,25 +135,26 @@ window.DECK = [
 
   { type: 'champs', group: 'Individuais', sport: 'Poker', photo: F('poker2'),
     people: [
-      { name: 'Ricardo Santos', detail: 'Campeão · 1º semestre', place: 1 },
+      { name: 'Ricardo Santos', detail: 'Campeão · ranking do 1º semestre', place: 1 },
+      { name: 'João Túlio', detail: 'Campeão · ranking do 2º semestre', place: 1 },
       { name: 'Cristiano Schuh', detail: 'Vice-campeão · 1º e 2º semestres', place: 2 } ] },
 
   { type: 'champs', group: 'Duplas', sport: 'Futevôlei', photo: F('futevolei'),
     people: [
-      { name: 'Christian e Kaue', detail: 'Categoria Ouro', place: 1 },
+      { name: 'Christian e Kauê', detail: 'Categoria Ouro', place: 1 },
       { name: 'Ander e Alexandre', detail: 'Categoria Prata', place: 1 },
-      { name: 'Clevinho e Bruna', detail: 'Categoria Mista', place: 1 } ] },
+      { name: 'Bruna e Clevinho', detail: 'Categoria Mista', place: 1 } ] },
 
   { type: 'champs', group: 'Duplas', sport: 'Vôlei de Areia', photo: F('areia'),
     people: [{ name: 'Lucas Santos e Alfredo Stahnke Jr', detail: 'Dupla campeã', place: 1 }] },
 
   { type: 'champs', group: 'Duplas', sport: 'Truco', photo: F('truco'),
-    people: [{ name: 'Sergio Wambier\nGenésio Aparecido da Silva', detail: 'Dupla campeã', place: 1 }] },
+    people: [{ name: 'Sergio Wambier\nGenésio Silva', detail: 'Dupla campeã', place: 1 }] },
 
-  { type: 'champs', group: 'Individuais', sport: 'Xadrez', stage: '2ª etapa', photo: F('xadrez'),
+  { type: 'champs', group: 'Individuais', sport: 'Xadrez', photo: F('xadrez'),
     people: [
-      { name: 'Juliano Rocha', detail: 'Campeão · 2ª etapa', place: 1 },
-      { name: 'Everson Machado', detail: 'Vice-campeão · 2ª etapa', place: 2 } ] },
+      { name: 'Juliano Santos', detail: 'Campeão', place: 1 },
+      { name: 'Everson Machado', detail: 'Vice-campeão', place: 2 } ] },
 
   { type: 'divider',
     title: 'Modalidades',
@@ -144,7 +162,7 @@ window.DECK = [
     list: ['Basquete 3x3', 'Futsal Feminino', 'Futsal Masculino', 'Fut-7', 'Vôlei Feminino', 'Vôlei Masculino'],
     img: 'img/abertura-coletivas.jpg' },
 
-  { type: 'team', sport: 'Basquete 3x3', team: 'Vaticano', img: F('basquete') },
+  { type: 'team', sport: 'Basquete 3x3', team: 'Coroinhas', img: F('basquete') },
   { type: 'team', sport: 'Futsal Feminino', team: 'Campeãs', img: F('futfem'),
     members: ['Aline Dutra', 'Jaqueline Moreira', 'Nathali Veiga', 'Sara Veiga', 'Taiana Santos'] },
   { type: 'team', sport: 'Futsal Masculino', team: 'Powertrain', img: F('futmasc') },
