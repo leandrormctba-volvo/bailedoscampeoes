@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Banner 5 x 3 (troféu) — Melhores do Ano AV 2026</title>
+<!-- Banner para impressão: proporção 5 x 3 (ex.: 5 m de largura por 3 m de altura).
+     Versão D: mãos erguendo um troféu no canto inferior direito; logo Associação Volvo no meio em cima,
+     estrela no canto inferior direito e o centro livre para fotos. -->
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+  @page { size: 2000px 1200px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2000px; height: 1200px; overflow: hidden; background: #062a33; color: #fff; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .art { position: relative; width: 2000px; height: 1200px; overflow: hidden;
+    background:
+      radial-gradient(55% 65% at 18% 25%, rgba(40,150,165,.45), transparent 65%),
+      radial-gradient(50% 60% at 88% 88%, rgba(242,182,50,.22), transparent 65%),
+      radial-gradient(40% 50% at 70% 8%, rgba(20,100,115,.5), transparent 70%),
+      linear-gradient(150deg, #1a6474 0%, #0e4351 38%, #08303b 68%, #041c24 100%); }
+  /* só as linhas de uma quadra, bem suaves */
+  .court { position: absolute; inset: 0; background: url('../img/quadra-fundo.svg') center / cover no-repeat; opacity: .07; }
+  .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(2,14,18,.5)); }
+
+  /* logo no meio, em cima */
+  .logo { position: absolute; left: 50%; top: 84px; transform: translateX(-50%); width: 490px; z-index: 3;
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.4)); }
+
+  /* título no canto superior esquerdo */
+  .title { position: absolute; left: 80px; top: 62px; z-index: 3; font-family: 'Anton', Impact, sans-serif; font-weight: 400;
+    text-transform: uppercase; font-size: 100px; line-height: .98; letter-spacing: .01em; text-shadow: 0 10px 40px rgba(0,0,0,.35); }
+  .title .av { display: block; color: #f2b632; }
+  .title .bar { display: block; width: 160px; height: 10px; margin-top: 22px; background: linear-gradient(90deg, #f2b632 0 70%, transparent 70% 78%, #3fb5bf 78%); transform: skewX(-30deg); }
+
+  /* listras douradas no canto inferior esquerdo, discretas */
+  .stripes { position: absolute; left: -40px; bottom: -40px; width: 460px; height: 230px; opacity: .35;
+    background: repeating-linear-gradient(55deg, transparent 0 34px, rgba(242,182,50,.6) 34px 44px);
+    -webkit-mask-image: linear-gradient(225deg, transparent 30%, #000 85%); mask-image: linear-gradient(225deg, transparent 30%, #000 85%); }
+
+  /* mãos erguendo o troféu no canto inferior direito */
+  .glow { position: absolute; right: -160px; bottom: 28px; width: 960px; height: 960px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,226,140,.55), rgba(242,182,50,.16) 40%, transparent 68%); }
+  .rays { position: absolute; right: -630px; bottom: -442px; width: 1900px; height: 1900px; opacity: .35;
+    background: repeating-conic-gradient(from 0deg, rgba(242,182,50,.9) 0deg 3deg, transparent 3deg 15deg);
+    -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 42%); mask-image: radial-gradient(circle, #000 0%, transparent 42%); }
+  .flare { position: absolute; border-radius: 50%; mix-blend-mode: screen; }
+  .flare.h { right: -110px; bottom: 516px; width: 860px; height: 10px; background: radial-gradient(ellipse, rgba(255,250,225,.95), rgba(255,214,120,.35) 35%, transparent 70%); }
+  .flare.v { right: 315px; bottom: 201px; width: 10px; height: 640px; background: radial-gradient(ellipse, rgba(255,250,225,.9), rgba(255,214,120,.3) 35%, transparent 70%); }
+  #trophy { position: absolute; right: 90px; bottom: 0; width: 460px; height: 690px; transform: rotate(-4deg); transform-origin: 50% 100%;
+    filter: drop-shadow(0 0 30px rgba(255,214,110,.8)) drop-shadow(0 26px 44px rgba(0,0,0,.5)); }
+  #trophy svg { width: 100%; height: 100%; display: block; }
+  .core { position: absolute; right: 270px; bottom: 471px; width: 100px; height: 100px; border-radius: 50%; mix-blend-mode: screen;
+    background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,240,190,.45) 40%, transparent 70%); }
+  .spark { position: absolute; background: #fff7d6; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 8px #ffe08a); }
+</style></head>
+<body><div class="art">
+  <div class="court"></div>
+  <div class="stripes"></div>
+  <div class="glow"></div><div class="rays"></div>
+  <div class="flare h"></div><div class="flare v"></div>
+  <div id="trophy"></div>
+  <div class="core"></div>
+  <i class="spark" style="right:620px;bottom:640px;width:30px;height:30px"></i>
+  <i class="spark" style="right:60px;bottom:520px;width:24px;height:24px"></i>
+  <i class="spark" style="right:40px;bottom:300px;width:18px;height:18px"></i>
+  <div class="vignette"></div>
+  <img class="logo" src="../img/logo-associacao-volvo.png" alt="Associação Volvo">
+  <div class="title">Melhores<br>do ano<span class="av">AV 2026</span><span class="bar"></span></div>
+</div>
+<script>
+  // ?z=2 aumenta a arte (para gerar a imagem em alta resolução)
+  const z = parseFloat(new URLSearchParams(location.search).get('z'));
+  if (z) { document.documentElement.style.zoom = z; document.documentElement.style.overflow = 'hidden'; }
+  // troféu dourado erguido por duas mãos (silhuetas com contorno de luz)
+  document.getElementById('trophy').innerHTML = `
+  <svg viewBox="0 0 600 900">
+    <defs>
+      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#7a4a0c"/><stop offset=".28" stop-color="#ffe9a8"/><stop offset=".5" stop-color="#f2b632"/>
+        <stop offset=".78" stop-color="#b9781a"/><stop offset="1" stop-color="#5e3707"/></linearGradient>
+      <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a8"/><stop offset="1" stop-color="#a8680f"/></linearGradient>
+      <linearGradient id="inside" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e3707"/><stop offset="1" stop-color="#c78a24"/></linearGradient>
+      <linearGradient id="plinth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2f36"/><stop offset="1" stop-color="#0b0d12"/></linearGradient>
+      <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f3a46"/><stop offset="1" stop-color="#03141a"/></linearGradient>
+      <g id="hand">
+        <!-- antebraço -->
+        <path d="M146 680 C128 750 108 830 92 900 H236 C230 830 226 752 232 684 Z"/>
+        <!-- mão fechada segurando a base: dorso, polegar por cima e dedos na frente -->
+        <path d="M146 684 C136 634 146 586 172 552 C188 530 210 518 236 514
+                 C254 498 282 494 298 504 C308 512 302 526 286 530
+                 L288 538 C302 542 304 560 292 566 C304 572 304 590 292 596
+                 C302 602 300 620 288 624 C296 632 290 648 272 650
+                 C254 668 240 680 232 690 Z"/>
+      </g>
+      <g id="knuckles">
+        <path d="M290 566 C268 568 246 566 222 558"/>
+        <path d="M290 596 C268 598 246 596 220 588"/>
+        <path d="M286 624 C266 626 246 624 222 616"/>
+        <path d="M286 530 C268 534 250 534 236 528"/>
+      </g>
+    </defs>
+    <!-- alças -->
+    <path d="M162 130 C70 128 58 272 196 306" fill="none" stroke="url(#goldV)" stroke-width="20" stroke-linecap="round"/>
+    <path d="M438 130 C530 128 542 272 404 306" fill="none" stroke="url(#goldV)" stroke-width="20" stroke-linecap="round"/>
+    <!-- taça -->
+    <path d="M150 100 H450 C450 272 402 360 300 382 C198 360 150 272 150 100 Z" fill="url(#gold)"/>
+    <ellipse cx="300" cy="100" rx="150" ry="24" fill="url(#goldV)"/>
+    <ellipse cx="300" cy="102" rx="132" ry="15" fill="url(#inside)"/>
+    <path d="M190 128 C186 228 206 300 246 344" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="12" stroke-linecap="round"/>
+    <!-- estrela na taça -->
+    <path d="M300 186 L311 216 L343 217 L318 236 L327 267 L300 249 L273 267 L282 236 L257 217 L289 216 Z" fill="#fff6da" fill-opacity=".9"/>
+    <!-- haste, nó e base -->
+    <path d="M284 380 H316 L328 452 H272 Z" fill="url(#gold)"/>
+    <ellipse cx="300" cy="455" rx="44" ry="14" fill="url(#goldV)"/>
+    <path d="M256 466 H344 L362 520 H238 Z" fill="url(#gold)"/>
+    <rect x="212" y="518" width="176" height="78" rx="6" fill="url(#plinth)" stroke="#f2b632" stroke-opacity=".7" stroke-width="3"/>
+    <rect x="262" y="540" width="76" height="34" rx="3" fill="url(#gold)"/>
+    <!-- mãos -->
+    <g fill="url(#skin)" stroke="#ffd27a" stroke-opacity=".6" stroke-width="6" stroke-linejoin="round">
+      <use href="#hand" transform="translate(-24 0)"/>
+      <use href="#hand" transform="translate(624 0) scale(-1 1)"/>
+    </g>
+    <g fill="url(#skin)">
+      <use href="#hand" transform="translate(-24 0)"/>
+      <use href="#hand" transform="translate(624 0) scale(-1 1)"/>
+    </g>
+    <g fill="none" stroke="#ffd27a" stroke-opacity=".45" stroke-width="3" stroke-linecap="round">
+      <use href="#knuckles" transform="translate(-24 0)"/>
+      <use href="#knuckles" transform="translate(624 0) scale(-1 1)"/>
+    </g>
+  </svg>`;
+</script>
+</body></html>

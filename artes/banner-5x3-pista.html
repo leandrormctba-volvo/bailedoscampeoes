@@ -15,8 +15,14 @@
       radial-gradient(50% 60% at 88% 88%, rgba(242,182,50,.22), transparent 65%),
       radial-gradient(40% 50% at 70% 8%, rgba(20,100,115,.5), transparent 70%),
       linear-gradient(150deg, #1a6474 0%, #0e4351 38%, #08303b 68%, #041c24 100%); }
-  /* linhas de uma pista de atletismo, bem suaves (desenhadas no script abaixo) */
-  .track { position: absolute; inset: 0; opacity: .12; } .track svg { width: 100%; height: 100%; display: block; }
+  /* pedaço de pista de atletismo em 3D, com raias de luz (desenhada no script abaixo) */
+  .trackwrap { position: absolute; inset: 0; perspective: 1500px; perspective-origin: 50% 0%; overflow: hidden; }
+  .track { position: absolute; left: -400px; top: 380px; width: 2800px; height: 1500px;
+    transform: translateZ(-1300px) rotateX(64deg) rotateZ(-10deg); transform-origin: 50% 50%;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 2%, #000 40%); mask-image: linear-gradient(to bottom, transparent 2%, #000 40%); opacity: .82; }
+  .track svg { width: 100%; height: 100%; display: block; overflow: visible; }
+  .horizon { position: absolute; left: 0; right: 0; top: 560px; height: 260px; pointer-events: none;
+    background: radial-gradient(60% 40% at 45% 60%, rgba(95,240,255,.14), transparent 70%); }
   .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(2,14,18,.5)); }
 
   /* logo no meio, em cima */
@@ -51,7 +57,8 @@
   .spark { position: absolute; background: #fff7d6; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 8px #ffe08a); }
 </style></head>
 <body><div class="art">
-  <div class="track" id="track"></div>
+  <div class="horizon"></div>
+  <div class="trackwrap"><div class="track" id="track"></div></div>
   <div class="stripes"></div>
   <div class="glow"></div><div class="rays"></div>
   <div class="flare h"></div><div class="flare v"></div>
@@ -68,24 +75,44 @@
   // ?z=2 aumenta a arte (para gerar a imagem em alta resolução)
   const z = parseFloat(new URLSearchParams(location.search).get('z'));
   if (z) { document.documentElement.style.zoom = z; document.documentElement.style.overflow = 'hidden'; }
-  // pista de atletismo: 8 raias em volta de um gramado, levemente inclinada
+  // pista de atletismo em 3D: piso escuro, raias de luz (neon), rastros dourados de velocidade,
+  // linha de chegada e números das raias
   (function () {
-    const cx = 1000, cy = 610, L = 960, r0 = 220, lane = 34, n = 8;
+    const cx = 1400, cy = 750, L = 1300, r0 = 380, lane = 44, n = 8, rO = r0 + n * lane;
     const oval = r => `M${cx - L / 2} ${cy - r}H${cx + L / 2}A${r} ${r} 0 0 1 ${cx + L / 2} ${cy + r}H${cx - L / 2}A${r} ${r} 0 0 1 ${cx - L / 2} ${cy - r}Z`;
-    let s = '';
-    for (let i = 0; i <= n; i++) s += `<path d="${oval(r0 + i * lane)}" stroke-width="${i === 0 || i === n ? 6 : 4}"/>`;
-    // linha de chegada e números das raias (reta de baixo)
-    const fx = cx - 180;
-    s += `<line x1="${fx}" y1="${cy + r0}" x2="${fx}" y2="${cy + r0 + n * lane}" stroke-width="8"/>`;
+    const ovalRev = r => `M${cx - L / 2} ${cy - r}A${r} ${r} 0 0 0 ${cx - L / 2} ${cy + r}H${cx + L / 2}A${r} ${r} 0 0 0 ${cx + L / 2} ${cy - r}Z`;
+    let s = `<defs>
+      <linearGradient id="surf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b4a58"/><stop offset="1" stop-color="#05242d"/></linearGradient>
+      <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#5ff0ff" stroke-opacity=".18" stroke-width="2"/></pattern>
+      <filter id="neon" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>`;
+    // piso das raias e gramado com grade
+    s += `<path d="${oval(rO)} ${ovalRev(r0)}" fill="url(#surf)" fill-opacity=".9"/>`;
+    s += `<path d="${oval(r0)}" fill="url(#grid)"/>`;
+    // linhas das raias (neon)
+    let lines = '';
+    for (let i = 0; i <= n; i++) lines += `<path d="${oval(r0 + i * lane)}" stroke-width="${i === 0 || i === n ? 7 : 3.5}"/>`;
+    s += `<g fill="none" stroke="#6ff6ff" stroke-opacity=".85" filter="url(#neon)">${lines}</g>`;
+    // rastros de luz dourada correndo nas raias
+    const per = r => 2 * L + 2 * Math.PI * r;
+    let trails = '';
+    [[1, .08, 900], [3, .02, 1200], [5, .12, 800], [6, .05, 1000]].forEach(([k, off, len]) => {
+      const r = r0 + k * lane + lane / 2, p = per(r);
+      trails += `<path d="${oval(r)}" stroke-dasharray="${len} ${p}" stroke-dashoffset="${-p * (0.42 + off)}"/>`;
+    });
+    s += `<g fill="none" stroke="#ffc94a" stroke-width="12" stroke-linecap="round" filter="url(#neon)">${trails}</g>`;
+    s += `<g fill="none" stroke="#fff6da" stroke-width="4" stroke-linecap="round">${trails}</g>`;
+    // linha de chegada (quadriculada) e números das raias na reta da frente
+    const fx = cx - 120;
+    let chk = '';
+    for (let i = 0; i < n * 2; i++) for (let j = 0; j < 2; j++)
+      if ((i + j) % 2 === 0) chk += `<rect x="${fx + j * 22}" y="${cy + r0 + i * lane / 2}" width="22" height="${lane / 2}"/>`;
+    s += `<g fill="#ffffff" fill-opacity=".85">${chk}</g>`;
+    let nums = '';
     for (let i = 0; i < n; i++)
-      s += `<text x="${fx - 50}" y="${cy + r0 + i * lane + lane / 2 + 9}" font-family="Anton, Impact, sans-serif" font-size="26" fill="#bfeff2" stroke="none" text-anchor="middle">${i + 1}</text>`;
-    // marcas de largada escalonadas (reta de cima)
-    for (let i = 0; i < n; i++) {
-      const x = cx + 120 + i * 28, y = cy - r0 - i * lane;
-      s += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y - lane}" stroke-width="5"/>`;
-    }
-    document.getElementById('track').innerHTML =
-      `<svg viewBox="0 0 2000 1200" fill="none" stroke="#bfeff2" stroke-linecap="round"><g transform="rotate(-7 1000 600)">${s}</g></svg>`;
+      nums += `<text x="${fx - 70}" y="${cy + r0 + i * lane + lane / 2 + 15}" text-anchor="middle">${i + 1}</text>`;
+    s += `<g font-family="Anton, Impact, sans-serif" font-size="38" fill="#ffffff" fill-opacity=".8">${nums}</g>`;
+    document.getElementById('track').innerHTML = `<svg viewBox="0 0 2800 1500">${s}</svg>`;
   })();
   // estrela dourada facetada (mesma da capa da apresentação)
   (function () {
