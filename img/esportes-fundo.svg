@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none" stroke="#bfeff2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Desenhos de esporte para fundo (usar com opacidade baixa) -->
+  <!-- quadra de basquete (canto inferior esquerdo) -->
+  <g stroke-width="4" opacity=".9">
+    <rect x="-60" y="640" width="700" height="520"/>
+    <rect x="-60" y="780" width="250" height="240"/>
+    <circle cx="190" cy="900" r="90"/>
+    <path d="M-60 660 A 420 420 0 0 1 -60 1140"/>
+    <path d="M-60 700 Q 420 900 -60 1100"/>
+  </g>
+  <!-- campo de futebol (atrás, girado) -->
+  <g stroke-width="3" opacity=".55" transform="rotate(-8 1300 560)">
+    <rect x="720" y="230" width="1300" height="700"/>
+    <line x1="1370" y1="230" x2="1370" y2="930"/>
+    <circle cx="1370" cy="580" r="120"/>
+    <rect x="720" y="430" width="180" height="300"/>
+    <rect x="1840" y="430" width="180" height="300"/>
+  </g>
+  <!-- bola de vôlei (alto à direita) -->
+  <g stroke-width="5" transform="translate(1640 170) rotate(15)">
+    <circle r="130"/>
+    <path d="M0 -130 C -40 -40 -20 60 70 110"/>
+    <path d="M-125 -35 C -20 -10 80 -40 120 -60"/>
+    <path d="M-80 100 C -30 20 40 -10 125 10"/>
+  </g>
+  <!-- bola de futebol (embaixo, centro-direita) -->
+  <g stroke-width="5" transform="translate(1180 930)">
+    <circle r="110"/>
+    <path d="M0 -38 L36 -12 L22 30 L-22 30 L-36 -12 Z"/>
+    <path d="M0 -38 L0 -110 M36 -12 L104 -34 M22 30 L64 90 M-22 30 L-64 90 M-36 -12 L-104 -34"/>
+  </g>
+  <!-- bola de basquete (meio, embaixo) -->
+  <g stroke-width="5" transform="translate(760 990) rotate(-20)">
+    <circle r="120"/>
+    <path d="M-120 0 H120 M0 -120 V120"/>
+    <path d="M-85 -85 C -35 -40 -35 40 -85 85 M85 -85 C 35 -40 35 40 85 85"/>
+  </g>
+  <!-- bola de tênis (alto, centro) -->
+  <g stroke-width="5" transform="translate(1080 120)">
+    <circle r="62"/>
+    <path d="M-44 -44 C -10 -20 -10 20 -44 44 M44 -44 C 10 -20 10 20 44 44"/>
+  </g>
+  <!-- raquete (esquerda, meio) -->
+  <g stroke-width="4" transform="translate(110 470) rotate(-35)" opacity=".85">
+    <ellipse rx="70" ry="95"/>
+    <path d="M0 95 V200 M-40 -60 H40 M-60 -20 H60 M-60 20 H60 M-40 60 H40 M-30 -90 V90 M0 -95 V95 M30 -90 V90"/>
+  </g>
+  <!-- linhas de velocidade -->
+  <g stroke-width="3" opacity=".6">
+    <path d="M560 70 H860 M600 100 H820 M1500 1040 H1820 M1540 1010 H1760"/>
+  </g>
+</svg>

@@ -5,21 +5,23 @@
    Usa o mesmo conteúdo (js/data.js) da apresentação principal.
    ========================================================= */
 :root {
-  --navy: #0b0d12;
-  --glass: #151a24;
+  --navy: #04181f;
+  --glass: rgba(6, 36, 46, .85);
   --line: rgba(242, 182, 50, .22);
   --muted: rgba(235, 228, 210, .7);
   --title: 'Anton', 'Montserrat', Impact, sans-serif;
 }
-html, body { background: #07080c; }
+html, body { background: #04181f; }
 #bg { display: none; }
 body::before { content: ''; position: fixed; inset: 0; pointer-events: none;
   background:
     radial-gradient(60% 70% at 85% 15%, rgba(242,182,50,.16), transparent 60%),
-    radial-gradient(50% 60% at 10% 95%, rgba(47,143,232,.12), transparent 60%),
-    linear-gradient(160deg, #10131b 0%, #07080c 60%, #0c0e14 100%); }
-body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .05;
-  background: repeating-linear-gradient(90deg, #fff 0 1px, transparent 1px 120px), repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 120px); }
+    radial-gradient(55% 65% at 15% 90%, rgba(40,160,170,.28), transparent 60%),
+    linear-gradient(155deg, #1a6474 0%, #0e4351 35%, #08303b 65%, #041c24 100%); }
+/* desenhos de esporte transparentes ao fundo (bolas, quadra, campo, raquete) */
+body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opacity: .11;
+  background: url('../img/esportes-fundo.svg') center / cover no-repeat; animation: o2drift 40s ease-in-out infinite alternate; }
+@keyframes o2drift { from { transform: scale(1); } to { transform: scale(1.06) translate(-1%, -1%); } }
 
 /* Títulos: condensados, retos, com barra dourada */
 .h1, .h2, .teamname { font-family: var(--title); font-weight: 400; font-style: normal; letter-spacing: .01em; line-height: 1; }
@@ -44,10 +46,10 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opac
 .item, .stat, .runner, .plate2, .members span, .stagepill { border-radius: 6px; backdrop-filter: none; }
 .item { background: var(--glass); border: 1px solid rgba(255,255,255,.07); border-left: 6px solid var(--gold); }
 .item.plain { padding-left: 34px; } .item.plain::before { display: none; }
-.stat { background: linear-gradient(160deg, #1a1f2b, #11141c); border: 0; border-top: 6px solid var(--gold); }
+.stat { background: linear-gradient(160deg, #0f4655, #0a2f3a); border: 0; border-top: 6px solid var(--gold); }
 .stat::after { background: radial-gradient(circle, rgba(242,182,50,.18), transparent 70%); }
 .stat b { font-family: var(--title); font-weight: 400; font-size: 128px; }
-.ic.sport { border-radius: 8px; background: #0b0d12; }
+.ic.sport { border-radius: 8px; background: #04181f; }
 .thumb.ph { border-radius: 6px !important; }
 .cta { border-radius: 6px; transform: skewX(-10deg); }
 .cta i { border-radius: 4px; }
@@ -58,8 +60,8 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opac
 .cpphoto img, .teamframe img { border-radius: 0; }
 
 /* Placas de campeão */
-.plate2 { background: linear-gradient(90deg, #1b1f29, #12151d); border: 0; border-left: 8px solid var(--gold); }
-.plate2.silver { background: linear-gradient(90deg, #1b1f29, #12151d); border-left-color: var(--silver); }
+.plate2 { background: linear-gradient(90deg, #0f4655, #0a2f3a); border: 0; border-left: 8px solid var(--gold); }
+.plate2.silver { background: linear-gradient(90deg, #0f4655, #0a2f3a); border-left-color: var(--silver); }
 .plate2 .nm { font-family: var(--title); font-weight: 400; font-style: normal; letter-spacing: .02em; }
 .plate2 .lbl { border-radius: 2px; transform: skewX(-12deg); }
 .stagepill { background: var(--gold); color: #0b0d12; border: 0; transform: skewX(-12deg); }
@@ -72,8 +74,8 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opac
 /* Aberturas */
 .t-divider .bgimg { opacity: .22; filter: grayscale(.6) contrast(1.1); }
 .t-divider .sub { border-radius: 4px; background: var(--gold); color: #0b0d12; box-shadow: none; transform: skewX(-10deg); }
-.mlist { border-radius: 6px; background: rgba(11,13,18,.8); border: 0; border-top: 6px solid var(--gold); }
-.mlist span { border-radius: 4px; font-family: var(--title); font-weight: 400; letter-spacing: .03em; background: #151a24; border: 0; }
+.mlist { border-radius: 6px; background: rgba(4,28,36,.82); border: 0; border-top: 6px solid var(--gold); }
+.mlist span { border-radius: 4px; font-family: var(--title); font-weight: 400; letter-spacing: .03em; background: rgba(8,44,55,.9); border: 0; }
 
 /* Corrida e equipes */
 .racecol h3 { font-family: var(--title); font-weight: 400; }
