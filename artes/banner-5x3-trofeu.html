@@ -35,15 +35,17 @@
     -webkit-mask-image: linear-gradient(225deg, transparent 30%, #000 85%); mask-image: linear-gradient(225deg, transparent 30%, #000 85%); }
 
   /* foto real: mãos erguendo o troféu, presa ao canto inferior direito e se fundindo com o fundo */
-  .glow { position: absolute; right: 60px; bottom: 380px; width: 900px; height: 900px; border-radius: 50%;
+  .glow { position: absolute; right: -40px; bottom: 120px; width: 760px; height: 760px; border-radius: 50%;
     background: radial-gradient(circle, rgba(255,214,120,.38), rgba(242,182,50,.12) 40%, transparent 68%); }
   .photowrap { position: absolute; right: 0; bottom: 0; width: 1150px; height: 1200px; isolation: isolate;
-    -webkit-mask-image: radial-gradient(58% 60% at 58% 56%, #000 66%, transparent 100%); mask-image: radial-gradient(58% 60% at 58% 56%, #000 66%, transparent 100%); }
+    transform: scale(.62); transform-origin: 100% 100%; /* troféu do tamanho da estrela das outras artes */
+    -webkit-mask-image: radial-gradient(58% 60% at 58% 58%, #000 62%, transparent 92%); mask-image: radial-gradient(58% 60% at 58% 58%, #000 62%, transparent 92%); }
   .photowrap > div { position: absolute; left: 0; right: 0; }
   /* a foto (a taça fica perto do topo da foto original) */
-  .photo { top: 140px; bottom: 0; background: url('../img/parabens.jpg') right 0 top 0 / auto 1060px no-repeat; filter: saturate(1.1) contrast(1.06); }
+  .photo { top: 200px; bottom: 0; background: url('../img/parabens.jpg') right 0 top 0 / auto 1060px no-repeat; filter: saturate(1.1) contrast(1.06);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 45px); mask-image: linear-gradient(to bottom, transparent 0, #000 45px); }
   /* continuação do fundo desfocado acima da foto (faixa de cima da própria foto, esticada e borrada) */
-  .ext { top: -60px; height: 230px; background: url('../img/parabens.jpg') right 0 top 0 / 1569px 9000px no-repeat; filter: blur(22px) saturate(1.1); }
+  .ext { top: 0; height: 290px; background: url('../img/parabens.jpg') right 0 top 0 / 1569px 9000px no-repeat; filter: blur(22px) saturate(1.1); }
   /* tom petróleo por cima do desfoque claro da foto, sem cobrir a taça nem as mãos */
   .tint { top: 0; bottom: 0; mix-blend-mode: multiply; background: radial-gradient(32% 62% at 58% 55%, transparent 52%, rgba(10,55,68,.9) 100%); }
   .spark { position: absolute; background: #fff7d6; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); filter: drop-shadow(0 0 8px #ffe08a); }
@@ -53,8 +55,8 @@
   <div class="stripes"></div>
   <div class="glow"></div>
   <div class="photowrap"><div class="ext"></div><div class="photo"></div><div class="tint"></div></div>
-  <i class="spark" style="right:760px;bottom:760px;width:30px;height:30px"></i>
-  <i class="spark" style="right:120px;bottom:900px;width:22px;height:22px"></i>
+  <i class="spark" style="right:560px;bottom:520px;width:30px;height:30px"></i>
+  <i class="spark" style="right:70px;bottom:640px;width:22px;height:22px"></i>
   <div class="vignette"></div>
   <img class="logo" src="../img/logo-associacao-volvo.png" alt="Associação Volvo">
   <div class="title">Melhores<br>do ano<span class="av">AV 2026</span><span class="bar"></span></div>
