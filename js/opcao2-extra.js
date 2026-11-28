@@ -9,7 +9,7 @@
    ========================================================= */
 (function () {
   const D = window.DECK;
-  const V = n => 'video/' + n + '.mp4';
+  const V = n => 'video/' + n + '.mp4?v=2'; // ?v=2: força baixar a versão nova dos vídeos
 
   // premiados: box 3D com a modalidade no lugar da foto
   window.O2_SPORTBOX = true;
