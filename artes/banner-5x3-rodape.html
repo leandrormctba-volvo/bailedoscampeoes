@@ -22,11 +22,19 @@
   .title .bar { display: block; width: 150px; height: 9px; margin-top: 20px; background: linear-gradient(90deg, #f2b632 0 70%, transparent 70% 78%, #3fb5bf 78%); transform: skewX(-30deg); }
   .logo { width: 490px; filter: drop-shadow(0 4px 18px rgba(0,0,0,.4)); }
   .starbox { position: relative; width: 520px; height: 300px; display: flex; justify-content: flex-end; align-items: center; }
-  .starbox .glow { position: absolute; right: -90px; top: 50%; width: 520px; height: 520px; margin-top: -260px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,226,140,.5), rgba(242,182,50,.14) 40%, transparent 68%); }
-  .starbox .flare { position: absolute; right: -40px; top: 50%; width: 520px; height: 8px; margin-top: -4px; border-radius: 50%; mix-blend-mode: screen;
+  /* estrela com luz vindo de trás: halo, raios suaves girando em volta e cruz de brilho */
+  .sw { position: relative; width: 270px; height: 270px; margin-right: 10px; }
+  .sw > div:not(#star) { position: absolute; left: 50%; top: 50%; border-radius: 50%; pointer-events: none; }
+  .sw .rays { width: 900px; height: 900px; margin: -450px 0 0 -450px; opacity: .26;
+    background: repeating-conic-gradient(from 4deg, rgba(255,214,120,.85) 0deg 2.5deg, transparent 2.5deg 11deg);
+    -webkit-mask-image: radial-gradient(circle, #000 12%, transparent 50%); mask-image: radial-gradient(circle, #000 12%, transparent 50%); }
+  .sw .halo { width: 640px; height: 640px; margin: -320px 0 0 -320px;
+    background: radial-gradient(circle, rgba(255,240,200,.75) 0%, rgba(255,214,120,.45) 16%, rgba(242,182,50,.16) 38%, transparent 66%); }
+  .sw .flare.h { width: 760px; height: 8px; margin: -4px 0 0 -380px; mix-blend-mode: screen;
     background: radial-gradient(ellipse, rgba(255,250,225,.95), rgba(255,214,120,.35) 35%, transparent 70%); }
-  #star { position: relative; width: 270px; height: 270px; margin-right: 10px; transform: rotate(-8deg);
+  .sw .flare.v { width: 8px; height: 420px; margin: -210px 0 0 -4px; mix-blend-mode: screen;
+    background: radial-gradient(ellipse, rgba(255,250,225,.9), rgba(255,214,120,.3) 35%, transparent 70%); }
+  #star { position: relative; width: 270px; height: 270px; transform: rotate(-8deg);
     filter: drop-shadow(0 0 26px rgba(255,214,110,.8)) drop-shadow(0 20px 34px rgba(0,0,0,.5)); }
   #star svg { width: 100%; height: 100%; display: block; }
 
@@ -43,7 +51,7 @@
   <div class="top">
     <div class="title">Melhores<br>do ano<span class="av">AV 2026</span><span class="bar"></span></div>
     <img class="logo" src="../img/logo-associacao-volvo.png" alt="Associação Volvo">
-    <div class="starbox"><div class="glow"></div><div class="flare"></div><div id="star"></div></div>
+    <div class="starbox"><div class="sw"><div class="rays"></div><div class="halo"></div><div class="flare h"></div><div class="flare v"></div><div id="star"></div></div></div>
   </div>
 </div>
 <script>
@@ -118,12 +126,10 @@
       ping(1060, 420, .95, 28), bol(1185, 300, 34),
       vol(1350, 510, 230, -20),
       basq(1905, 480, 195, 24),
-      med(1610, 440, 1.0, 10),
+      ten(1610, 420, 100, 15),
       ten(1990, 300, 70, -30)
     ].join('');
-    // linha de luz acima do rodapé
-    const line = `<path d="M0 250 C 500 210 1500 210 2000 250" fill="none" stroke="#6ff6ff" stroke-opacity=".35" stroke-width="3"/>`;
-    document.getElementById('footer').innerHTML = `<svg viewBox="0 0 2000 460">${defs}${line}
+    document.getElementById('footer').innerHTML = `<svg viewBox="0 0 2000 460">${defs}
       <g fill="none" stroke="#6ff6ff" stroke-opacity=".9" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#neon)">${parts}</g></svg>`;
   })();
 </script>
