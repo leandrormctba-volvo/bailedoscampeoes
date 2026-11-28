@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Banner 5 x 3 (emblema dourado) — Melhores do Ano AV 2026</title>
+<!-- Banner para impressão: proporção 5 x 3.
+     Versão estilo "prêmio": estrela e "Melhores do Ano" centralizados em dourado, letras grossas
+     parecidas com as do logo Associação Volvo, linhas diagonais e brilhos dourados no fundo petróleo. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 2000px; height: 1200px; overflow: hidden; background: #04181f; color: #fff; }
+  .art { position: relative; width: 2000px; height: 1200px; overflow: hidden;
+    background:
+      radial-gradient(38% 50% at 50% 40%, rgba(242,182,50,.18), transparent 70%),
+      radial-gradient(60% 70% at 50% 45%, rgba(26,100,116,.85), transparent 75%),
+      linear-gradient(160deg, #0e4351 0%, #08303b 45%, #031419 100%); }
+  .fx { position: absolute; inset: 0; }
+  .fx svg { width: 100%; height: 100%; display: block; }
+  .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(1,8,11,.6)); }
+
+  .emblem { position: absolute; left: 0; right: 0; top: 70px; display: flex; flex-direction: column; align-items: center; z-index: 3; }
+  .starwrap { position: relative; width: 300px; height: 270px; display: grid; place-items: center; }
+  .starwrap .glow { position: absolute; inset: -160px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,226,140,.55), rgba(242,182,50,.14) 35%, transparent 62%); }
+  .starwrap .flare { position: absolute; left: 50%; top: 50%; width: 760px; height: 8px; margin: -4px 0 0 -380px; border-radius: 50%; mix-blend-mode: screen;
+    background: radial-gradient(ellipse, rgba(255,250,225,.95), rgba(255,214,120,.35) 35%, transparent 70%); }
+  #star { position: relative; width: 250px; height: 250px; filter: drop-shadow(0 0 26px rgba(255,214,110,.85)) drop-shadow(0 20px 30px rgba(0,0,0,.5)); }
+  #star svg { width: 100%; height: 100%; display: block; }
+
+  .word { font-family: 'Inter', Arial, sans-serif; font-weight: 900; text-transform: uppercase; text-align: center;
+    font-size: 200px; line-height: .92; letter-spacing: -.01em;
+    background: linear-gradient(180deg, #fff6d6 0%, #f6d27a 30%, #f2b632 50%, #a8680f 58%, #e9b94f 78%, #fff1c1 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 6px 0 rgba(60,34,4,.55)) drop-shadow(0 18px 40px rgba(0,0,0,.55)); }
+  .word.w1 { margin-top: 10px; }
+  .rule { display: flex; align-items: center; gap: 26px; margin-top: 34px; }
+  .rule i { display: block; width: 300px; height: 3px; background: linear-gradient(90deg, transparent, #f2b632); }
+  .rule i:last-child { background: linear-gradient(90deg, #f2b632, transparent); }
+  .rule b { width: 14px; height: 14px; background: #f2b632; transform: rotate(45deg); }
+  .rule span { font-family: 'Inter', Arial, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: .08em; color: #fff; }
+  .logo { width: 440px; margin-top: 34px; opacity: .95; filter: drop-shadow(0 4px 18px rgba(0,0,0,.4)); }
+</style></head>
+<body><div class="art">
+  <div class="fx" id="fx"></div>
+  <div class="vignette"></div>
+  <div class="emblem">
+    <div class="starwrap"><div class="glow"></div><div class="flare"></div><div id="star"></div></div>
+    <div class="word w1">Melhores</div>
+    <div class="word">do ano</div>
+    <div class="rule"><i></i><b></b><span>AV 2026</span><b></b><i></i></div>
+    <img class="logo" src="../img/logo-associacao-volvo.png" alt="Associação Volvo">
+  </div>
+</div>
+<script>
+  // ?z=2 aumenta a arte (para gerar a imagem em alta resolução)
+  const z = parseFloat(new URLSearchParams(location.search).get('z'));
+  if (z) { document.documentElement.style.zoom = z; document.documentElement.style.overflow = 'hidden'; }
+
+  // linhas diagonais douradas e poeira de brilho (sorteio fixo, sai sempre igual)
+  (function () {
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    let s = `<defs><filter id="bl"><feGaussianBlur stdDeviation="2.2"/></filter>
+      <linearGradient id="ln" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f2b632" stop-opacity="0"/><stop offset=".5" stop-color="#ffe2a0" stop-opacity=".75"/><stop offset="1" stop-color="#f2b632" stop-opacity="0"/></linearGradient></defs>`;
+    // linhas cruzando os cantos, como na referência
+    [[-100, 260, 520, -60], [-80, 640, 760, -60], [1240, -60, 2100, 820], [1560, -60, 2100, 420], [1300, 1260, 2100, 700], [-100, 900, 420, 1260]]
+      .forEach(([x1, y1, x2, y2]) => s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="url(#ln)" stroke-width="5" gradientUnits="userSpaceOnUse"/>`);
+    // poeira dourada: mais densa nos cantos de baixo
+    let dust = '', glow = '';
+    for (let k = 0; k < 900; k++) {
+      const side = rnd() < .5 ? 0 : 1;
+      const x = side ? 2000 - Math.pow(rnd(), 1.6) * 900 : Math.pow(rnd(), 1.6) * 900;
+      const y = 1200 - Math.pow(rnd(), 1.4) * 900;
+      const r = .8 + Math.pow(rnd(), 3) * 4.5, o = (.25 + rnd() * .75).toFixed(2);
+      dust += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(2)}" fill="#ffd77a" fill-opacity="${o}"/>`;
+      if (r > 3.2) glow += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(r * 3).toFixed(1)}" fill="#ffc94a" fill-opacity=".25"/>`;
+    }
+    s += `<g filter="url(#bl)">${glow}</g><g>${dust}</g>`;
+    document.getElementById('fx').innerHTML = `<svg viewBox="0 0 2000 1200">${s}</svg>`;
+  })();
+
+  // estrela dourada facetada (mesma da capa da apresentação)
+  (function () {
+    const C = 300, R = 280, r = 112, L = [-0.55, -0.83];
+    const P = (a, rad) => [C + rad * Math.cos(a * Math.PI / 180), C + rad * Math.sin(a * Math.PI / 180)];
+    const lo = [96, 56, 6], hi = [255, 246, 205];
+    const col = t => 'rgb(' + lo.map((v, i) => Math.round(v + (hi[i] - v) * t)).join(',') + ')';
+    let facets = '', outline = [];
+    for (let k = 0; k < 5; k++) {
+      const a = -90 + 72 * k, O = P(a, R), Ia = P(a - 36, r), Ib = P(a + 36, r);
+      outline.push(Ia, O);
+      for (const I of [Ia, Ib]) {
+        let nx = -(O[1] - I[1]), ny = O[0] - I[0];
+        const mx = (O[0] + I[0]) / 2 - C, my = (O[1] + I[1]) / 2 - C;
+        if (nx * mx + ny * my < 0) { nx = -nx; ny = -ny; }
+        const n = Math.hypot(nx, ny), t = Math.max(0, Math.min(1, .5 + .55 * ((nx / n) * L[0] + (ny / n) * L[1])));
+        facets += '<path d="M' + C + ' ' + C + 'L' + I.map(v => v.toFixed(1)) + 'L' + O.map(v => v.toFixed(1)) + 'Z" fill="' + col(t) + '"/>';
+      }
+    }
+    const pts = outline.map(p => p.map(v => v.toFixed(1)).join(' ')).join(' L');
+    document.getElementById('star').innerHTML =
+      '<svg viewBox="0 0 600 600"><defs><radialGradient id="sg" cx=".42" cy=".38" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".35" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>' +
+      facets + '<path d="M' + pts + 'Z" fill="url(#sg)"/><path d="M' + pts + 'Z" fill="none" stroke="#ffe9a8" stroke-width="3" stroke-linejoin="round" opacity=".85"/></svg>';
+  })();
+</script>
+</body></html>
