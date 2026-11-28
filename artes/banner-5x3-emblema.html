@@ -37,6 +37,8 @@
   .rule b { width: 14px; height: 14px; background: #f2b632; transform: rotate(45deg); }
   .rule span { font-family: 'Inter', Arial, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: .08em; color: #fff; }
   .logo { width: 440px; margin-top: 34px; opacity: .95; filter: drop-shadow(0 4px 18px rgba(0,0,0,.4)); }
+  /* ?v=topo: emblema menor, no alto e no meio, dentro do 1º metro e pouco (até ~1,20 m de 3 m = 480 px de 1200) */
+  .topo .emblem { top: 36px; transform: scale(.5); transform-origin: 50% 0; }
 </style></head>
 <body><div class="art">
   <div class="fx" id="fx"></div>
@@ -53,6 +55,7 @@
   // ?z=2 aumenta a arte (para gerar a imagem em alta resolução)
   const z = parseFloat(new URLSearchParams(location.search).get('z'));
   if (z) { document.documentElement.style.zoom = z; document.documentElement.style.overflow = 'hidden'; }
+  if (new URLSearchParams(location.search).get('v') === 'topo') document.querySelector('.art').classList.add('topo');
 
   // linhas diagonais douradas e poeira de brilho (sorteio fixo, sai sempre igual)
   (function () {
