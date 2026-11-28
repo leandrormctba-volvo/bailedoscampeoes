@@ -11,9 +11,13 @@
   const D = window.DECK;
   const V = n => 'video/' + n + '.mp4';
 
+  // premiados: box 3D com a modalidade no lugar da foto
+  window.O2_SPORTBOX = true;
+
   // 1) capa = Arte 8
   const ci = D.findIndex(s => s.type === 'cover');
-  if (ci >= 0) D[ci] = { type: 'image', img: 'artes/banner-5x3-emblema.png', alt: 'Melhores do Ano AV 2026 — Associação Volvo' };
+  // (montada ao vivo: fundo na tela toda, brilhos caindo e logo no rodapé)
+  if (ci >= 0) D[ci] = { type: 'gala' };
 
   // 2) vídeo do slide 4 = compilado das modalidades
   const vi = D.findIndex(s => s.type === 'video');

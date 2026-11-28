@@ -123,3 +123,77 @@ body:has(.slide.active.t-image) .brand, body:has(.slide.active.t-vfile) .brand {
 /* fundo preto atrás do vídeo (o ::after fica por cima da tela, então só some) */
 body:has(.slide.active.t-vfile)::before { background: #000; }
 body:has(.slide.active.t-vfile)::after { display: none; }
+
+/* ============ CAPA "GALA" (estilo da Arte 8, na tela toda) ============ */
+#galaFx, #glitter { position: fixed; inset: 0; pointer-events: none; opacity: 0; transition: opacity .8s; }
+#glitter { width: 100vw; height: 100vh; z-index: 5; }
+#galaFx {
+  background:
+    radial-gradient(38% 50% at 50% 42%, rgba(242,182,50,.18), transparent 70%),
+    radial-gradient(60% 70% at 50% 45%, rgba(26,100,116,.85), transparent 75%),
+    linear-gradient(160deg, #0e4351 0%, #08303b 45%, #031419 100%); }
+/* linhas diagonais douradas cruzando os cantos */
+#galaFx::before { content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(28deg, transparent calc(50% - 1.5px), rgba(255,226,160,.55) 50%, transparent calc(50% + 1.5px)) -38vw 22vh / 100% 100% no-repeat,
+    linear-gradient(28deg, transparent calc(50% - 1.5px), rgba(255,226,160,.4) 50%, transparent calc(50% + 1.5px)) -22vw 40vh / 100% 100% no-repeat,
+    linear-gradient(-32deg, transparent calc(50% - 1.5px), rgba(255,226,160,.55) 50%, transparent calc(50% + 1.5px)) 38vw 18vh / 100% 100% no-repeat,
+    linear-gradient(-32deg, transparent calc(50% - 1.5px), rgba(255,226,160,.4) 50%, transparent calc(50% + 1.5px)) 24vw 44vh / 100% 100% no-repeat,
+    linear-gradient(30deg, transparent calc(50% - 1.5px), rgba(255,226,160,.45) 50%, transparent calc(50% + 1.5px)) 40vw -46vh / 100% 100% no-repeat,
+    linear-gradient(-30deg, transparent calc(50% - 1.5px), rgba(255,226,160,.45) 50%, transparent calc(50% + 1.5px)) -40vw -46vh / 100% 100% no-repeat; }
+#galaFx::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 50%, rgba(1,8,11,.6)); }
+body:has(.slide.active.t-gala) #galaFx, body:has(.slide.active.t-gala) #glitter { opacity: 1; }
+body:has(.slide.active.t-gala)::after { opacity: 0; }
+#stage:has(.slide.active.t-gala) .o2-corner, #stage:has(.slide.active.t-gala) .o2-stripes { opacity: 0; }
+.slide.t-gala { padding: 0 !important; background: transparent; }
+
+.gala { position: absolute; left: 0; right: 0; top: 70px; display: flex; flex-direction: column; align-items: center; }
+.g-star { position: relative; width: 300px; height: 280px; display: grid; place-items: center; }
+.g-star .star-svg { position: relative; width: 260px; height: 260px; filter: drop-shadow(0 0 26px rgba(255,214,110,.85)) drop-shadow(0 20px 30px rgba(0,0,0,.5)); animation: starfloat 5s ease-in-out infinite; }
+.g-glow { position: absolute; inset: -170px; border-radius: 50%; background: radial-gradient(circle, rgba(255,226,140,.55), rgba(242,182,50,.14) 35%, transparent 62%); }
+.g-flare { position: absolute; left: 50%; top: 50%; width: 780px; height: 8px; margin: -4px 0 0 -390px; border-radius: 50%; mix-blend-mode: screen;
+  background: radial-gradient(ellipse, rgba(255,250,225,.95), rgba(255,214,120,.35) 35%, transparent 70%); }
+.g-word { font-family: 'Inter', 'Montserrat', Arial, sans-serif; font-weight: 900; text-transform: uppercase; text-align: center;
+  font-size: 196px; line-height: .92; letter-spacing: -.01em;
+  background: linear-gradient(180deg, #fff6d6 0%, #f6d27a 30%, #f2b632 50%, #a8680f 58%, #e9b94f 78%, #fff1c1 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 6px 0 rgba(60,34,4,.55)) drop-shadow(0 18px 40px rgba(0,0,0,.55)); }
+.g-word:first-of-type { margin-top: 10px; }
+.g-rule { display: flex; align-items: center; gap: 26px; margin-top: 32px; }
+.g-rule i { display: block; width: 300px; height: 3px; background: linear-gradient(90deg, transparent, #f2b632); }
+.g-rule i:last-child { background: linear-gradient(90deg, #f2b632, transparent); }
+.g-rule b { width: 14px; height: 14px; background: #f2b632; transform: rotate(45deg); }
+.g-rule span { font-family: 'Inter', 'Montserrat', Arial, sans-serif; font-weight: 900; font-size: 64px; letter-spacing: .08em; color: #fff; }
+/* logo Associação Volvo: no rodapé, centralizado, maior */
+body:has(.slide.active.t-gala) .brand { top: auto; bottom: calc(34px * var(--k, 1)); opacity: .95; }
+body:has(.slide.active.t-gala) .brand img { height: calc(66px * var(--k, 1)); }
+.portrait .gala { top: 260px; }
+.portrait .g-word { font-size: 150px; }
+
+/* ============ PREMIADOS: box 3D com a modalidade (no lugar da foto) ============ */
+.sb { display: grid !important; grid-template-columns: 600px 1fr; gap: 90px; align-items: center; height: 100%; padding: 10px 0 70px; }
+.champs.cp.sb { flex-direction: unset; }
+.sbox { position: relative; height: 640px; perspective: 1400px; }
+.sbox-face { position: absolute; inset: 0; border-radius: 18px; transform: rotateY(14deg) rotateX(3deg); transform-origin: 30% 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 44px 40px;
+  background: linear-gradient(150deg, #1f7486 0%, #0f4a59 45%, #08303b 100%);
+  border: 2px solid rgba(242,182,50,.85);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,.28), inset 0 0 0 10px rgba(4,24,31,.25),
+    5px 5px 0 #0a3a46, 10px 10px 0 #08323c, 15px 15px 0 #072c35, 20px 20px 0 #06262e, 25px 25px 0 #052128, 30px 30px 0 #041c22,
+    50px 70px 90px rgba(0,0,0,.6); }
+.sbox-face::before { content: ''; position: absolute; inset: 0; border-radius: 16px; pointer-events: none;
+  background: linear-gradient(165deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 42%); }
+.sbox-face::after { content: ''; position: absolute; inset: 18px; border: 1px solid rgba(242,182,50,.35); border-radius: 10px; pointer-events: none; }
+.sbox-ic { width: 150px; height: 150px; color: var(--gold); filter: drop-shadow(0 0 22px rgba(242,182,50,.55)); }
+.sbox-ic svg { width: 100%; height: 100%; display: block; }
+.sbox-t { font-family: var(--title); font-weight: 400; text-transform: uppercase; color: #fff; font-size: 116px; line-height: .95; margin-top: 30px;
+  text-shadow: 0 6px 24px rgba(0,0,0,.4); }
+.sbox-t.long { font-size: 84px; }
+.sbox-s { margin-top: 22px; padding: 8px 22px; background: var(--gold); color: #0b0d12; font-weight: 900; font-size: 30px; letter-spacing: .06em; transform: skewX(-10deg); border-radius: 4px; }
+.sbox-k { margin-top: 26px; font-weight: 800; font-size: 24px; letter-spacing: .34em; text-transform: uppercase; color: var(--gold); }
+/* lado direito */
+.race.sb .racecols { margin-top: 0; align-self: center; }
+.sbteam .teamlbl { font-size: 30px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 800; }
+.sbteam .teamname { margin-top: 10px; }
+.portrait .sb { grid-template-columns: 1fr; gap: 50px; align-content: start; padding-top: 30px; }
+.portrait .sbox { height: 420px; }

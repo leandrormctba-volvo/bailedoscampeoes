@@ -36,6 +36,18 @@
   };
   const icon = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[k] || ''}</svg>`;
 
+  // box 3D com o nome da modalidade (Opção 2: usado no lugar da foto nos slides de premiados)
+  const sportIcon = n => /corrida/i.test(n) ? 'corrida' : /mesa/i.test(n) ? 'pingpong' : /tênis/i.test(n) ? 'tenis' : /poker/i.test(n) ? 'poker'
+    : /futev/i.test(n) ? 'futevolei' : /vôlei/i.test(n) ? 'volei' : /truco/i.test(n) ? 'truco' : /xadrez/i.test(n) ? 'xadrez'
+    : /basquete/i.test(n) ? 'basquete' : /futsal/i.test(n) ? 'futsal' : /fut/i.test(n) ? 'fut7' : '';
+  const SBOX = s => `
+    <div class="sbox zoomIn" ${d(1)}><div class="sbox-face">
+      <div class="sbox-ic">${icon(sportIcon(s.sport))}</div>
+      <div class="sbox-t${s.sport.length > 14 ? ' long' : ''}">${esc(s.sport)}</div>
+      ${s.stage && !/^\d{4}$/.test(s.stage) ? `<div class="sbox-s">${esc(s.stage)}</div>` : ''}
+      <div class="sbox-k">Campeões 2026</div>
+    </div></div>`;
+
   // estrela dourada facetada (efeito metálico 3D, luz vindo do alto à esquerda)
   const STAR = (() => {
     const C = 300, R = 280, r = 112, L = [-0.55, -0.83];
@@ -114,7 +126,16 @@
         <div class="vmain big rv" ${d(1)} data-yt="${(s.youtube && s.youtube[0] && s.youtube[0].id) || 'anim'}"><div class="ytbox"><div id="ytplayer"></div></div><div class="player paused" id="player" hidden></div></div>
       </div>`,
 
-    // imagem ocupando a tela toda (capa da Opção 2)
+    // capa "gala" (Opção 2): estrela + MELHORES DO ANO dourado; fundo e brilhos caindo ficam na tela toda (js/gala.js)
+    gala: s => `
+      <div class="gala">
+        <div class="g-star zoomIn"><div class="g-glow"></div><div class="g-flare"></div>${STAR}</div>
+        <div class="g-word rv" ${d(2)}>Melhores</div>
+        <div class="g-word rv" ${d(3)}>do ano</div>
+        <div class="g-rule rv" ${d(5)}><i></i><b></b><span>AV 2026</span><b></b><i></i></div>
+      </div>`,
+
+    // imagem ocupando a tela toda
     image: s => `<img class="fullimg" src="${s.img}" alt="${esc(s.alt || '')}">`,
 
     // vídeo (arquivo) ocupando a tela toda; toca sozinho ao entrar no slide
@@ -175,6 +196,8 @@
             <div class="lbl">${bronze ? '3º LUGAR' : silver ? 'VICE' : 'CAMPEÃO'}</div>
           </div>`;
       }).join('');
+      if (window.O2_SPORTBOX) return `
+      <div class="champs cp sb">${SBOX(s)}<div class="plates n${n}">${plates}</div></div>`;
       return `
       <div class="champs cp">
         <div class="top"><div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div></div>
@@ -186,7 +209,13 @@
       </div>`;
     },
 
-    race: s => `
+    race: s => window.O2_SPORTBOX ? `
+      <div class="race sb">${SBOX(s)}
+        <div class="racecols">${s.cols.map((c, ci) => `
+          <div class="racecol"><h3 class="rv" ${d(3 + ci)}>${esc(c.title)}</h3>
+            ${c.rows.map((r, ri) => `<div class="runner rv" ${d(4 + ri + ci * 5)}><span class="md p${r[2] || 1}">${r[2] || 1}º</span><span><b>${esc(r[0])}</b><span>${esc(r[1])}</span></span></div>`).join('')}
+          </div>`).join('')}</div>
+      </div>` : `
       <div class="race">
         <div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div>
           <div class="bigframe zoomIn" ${d(2)} style="height:600px"><img src="${pic(s, 1.28)}" alt=""></div></div>
@@ -197,7 +226,14 @@
             </div>`).join('')}</div></div>
       </div>`,
 
-    team: s => `
+    team: s => window.O2_SPORTBOX ? `
+      <div class="teamslide sb">${SBOX(s)}
+        <div class="sbteam">
+          <div class="teamlbl rv" ${d(3)}>Equipe campeã</div>
+          <div class="teamname goldtext rv ${s.team.length > 12 ? 'sm' : ''}" ${d(4)}>${esc(s.team)}</div>
+          ${s.members ? `<div class="members rv" ${d(5)}>${s.members.map(m => `<span>${esc(m)}</span>`).join('')}</div>` : ''}
+        </div>
+      </div>` : `
       <div class="teamslide">
         <div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div>
           <div class="teamname goldtext rv ${s.team.length > 12 ? 'sm' : ''}" ${d(3)}>${esc(s.team)}</div>
@@ -419,6 +455,8 @@
 
   window.__go = n => go(n - 1);
   // window.START_AT_BEGINNING (definido no HTML): ao atualizar a página, sempre volta ao slide 1
-  go(window.START_AT_BEGINNING ? 0 : (parseInt(location.hash.slice(1), 10) || 1) - 1);
+  // ?s=N no endereço abre direto no slide N (útil para testar)
+  const sQ = parseInt(new URLSearchParams(location.search).get('s'), 10);
+  go(sQ ? sQ - 1 : window.START_AT_BEGINNING ? 0 : (parseInt(location.hash.slice(1), 10) || 1) - 1);
   }
 })();

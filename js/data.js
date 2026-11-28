@@ -145,11 +145,19 @@ window.DECK = [
         ['Sara Veiga', '3º lugar', 3] ] }
     ] },
 
-  { type: 'champs', group: 'Individuais', sport: 'Poker', photo: F('poker2'),
-    people: [
-      { name: 'Ricardo Santos', detail: 'Campeão · ranking do 1º semestre', place: 1 },
-      { name: 'João Túlio', detail: 'Campeão · ranking do 2º semestre', place: 1 },
-      { name: 'Cristiano Schuh', detail: 'Vice-campeão · 1º e 2º semestres', place: 2 } ] },
+  // Poker: dois rankings (1º e 2º semestre), do 1º ao 3º lugar
+  { type: 'race', group: 'Individuais', sport: 'Poker', stage: '2026',
+    img: F('poker2'),
+    cols: [
+      { title: 'Ranking 1º semestre', rows: [
+        ['Cristiano Schuh', 'Campeão', 1],
+        ['Johnny Durão', 'Vice-campeão', 2],
+        ['Gustavo Aires', '3º lugar', 3] ] },
+      { title: 'Ranking 2º semestre', rows: [
+        ['Gregory Neulan Lunz', 'Campeão', 1],
+        ['Gustavo Aires', 'Vice-campeão', 2],
+        ['Eduardo Diazzi', '3º lugar', 3] ] }
+    ] },
 
   { type: 'champs', group: 'Duplas', sport: 'Futevôlei', photo: F('futevolei'),
     people: [
@@ -158,7 +166,7 @@ window.DECK = [
       { name: 'Bruna Dias Costa\nCleverton Skrypietz', detail: 'Dupla Mista', place: 1 } ] },
 
   { type: 'champs', group: 'Duplas', sport: 'Vôlei de Areia', photo: F('areia'),
-    people: [{ name: 'Lucas Santos e Alfredo Stahnke Jr', detail: 'Dupla campeã', place: 1 }] },
+    people: [{ name: 'Lucas Santos\nAlexandro Vargas', detail: 'Dupla campeã', place: 1 }] },
 
   { type: 'champs', group: 'Duplas', sport: 'Truco', photo: F('truco'),
     people: [
