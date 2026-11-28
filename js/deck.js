@@ -315,6 +315,18 @@
   // ao sair: pausa. O próximo vídeo já vai sendo carregado.
   const files = [...document.querySelectorAll('video.vfull')];
   files.forEach(v => v.addEventListener('ended', () => { if (auto && slides[cur].contains(v)) next(); }));
+  // baixa todos os vídeos em segundo plano, um por vez e na ordem da apresentação,
+  // para que estejam inteiros no computador quando chegar a vez de cada um (sem travar)
+  (async function baixarVideos() {
+    for (const v of files) {
+      try {
+        const blob = await (await fetch(v.getAttribute('src'))).blob();
+        // troca para a cópia baixada (se o vídeo estiver tocando agora, deixa como está)
+        if (v.paused) v.src = URL.createObjectURL(blob);
+        v.dataset.pronto = '1';
+      } catch (e) { /* sem internet: o vídeo carrega normalmente quando o slide abrir */ }
+    }
+  })();
   function playFile(s) {
     files.forEach(v => { if (!s.contains(v)) v.pause(); });
     const v = s.querySelector('video.vfull');
