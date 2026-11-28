@@ -120,4 +120,6 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opac
 #stage:has(.slide.active.t-image) .o2-corner, #stage:has(.slide.active.t-vfile) .o2-corner,
 #stage:has(.slide.active.t-image) .o2-stripes, #stage:has(.slide.active.t-vfile) .o2-stripes { opacity: 0; }
 body:has(.slide.active.t-image) .brand, body:has(.slide.active.t-vfile) .brand { opacity: 0; transition: opacity .4s; }
-body:has(.slide.active.t-vfile)::before, body:has(.slide.active.t-vfile)::after { background: #000; opacity: 1; animation: none; }
+/* fundo preto atrás do vídeo (o ::after fica por cima da tela, então só some) */
+body:has(.slide.active.t-vfile)::before { background: #000; }
+body:has(.slide.active.t-vfile)::after { display: none; }

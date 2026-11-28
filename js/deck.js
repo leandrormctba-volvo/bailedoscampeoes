@@ -180,7 +180,7 @@
         <div class="top"><div><div class="h2 rv" ${d(1)}>${esc(s.sport)}</div></div>
           ${s.stage ? `<div class="stagepill rv" ${d(2)}>${esc(s.stage)}</div>` : ''}</div>
         <div class="cpbody">
-          <div class="cpphoto zoomIn" ${d(2)}><div class="ring"></div><img src="${s.photo}" alt="${esc(s.sport)}"><span class="credit">Foto ilustrativa · Família AV</span></div>
+          <div class="cpphoto zoomIn" ${d(2)}><div class="ring"></div><img src="${s.photo}" alt="${esc(s.sport)}">${String(s.photo).includes('img/videos/') ? '' : '<span class="credit">Foto ilustrativa · Família AV</span>'}</div>
           <div class="plates n${n}">${plates}</div>
         </div>
       </div>`;
@@ -204,7 +204,7 @@
           ${s.members ? '' : `<div class="teamlbl rv" ${d(4)}>Equipe campeã</div>`}
           ${s.members ? `<div class="members rv" ${d(5)}>${s.members.map(m => `<span>${esc(m)}</span>`).join('')}</div>` : ''}
         </div>
-        <div class="teamframe zoomIn" ${d(2)}><div class="ring"></div><img src="${pic(s, 1.15, 1200)}" alt="${esc(s.sport)}"><span class="credit">Foto ilustrativa · Família AV</span></div>
+        <div class="teamframe zoomIn" ${d(2)}><div class="ring"></div><img src="${pic(s, 1.15, 1200)}" alt="${esc(s.sport)}">${String(s.img).includes('img/videos/') ? '' : '<span class="credit">Foto ilustrativa · Família AV</span>'}</div>
       </div>`,
 
     final: s => `

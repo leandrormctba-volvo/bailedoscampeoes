@@ -38,7 +38,12 @@
   const out = [];
   D.forEach(s => {
     const k = s.sport && VIDEOS[s.sport];
-    if (k) out.push({ type: 'vfile', src: V(k), title: s.sport });
+    if (k) {
+      out.push({ type: 'vfile', src: V(k), title: s.sport });
+      // foto dos premiados = um quadro do próprio vídeo (pasta img/videos), no lugar da foto antiga
+      s = Object.assign({}, s);
+      if (s.type === 'champs') s.photo = 'img/videos/' + k + '.jpg'; else s.img = 'img/videos/' + k + '.jpg';
+    }
     out.push(s);
     if (s.type === 'team' && s.sport === 'Fut-7')
       EXTRAS_DEPOIS_DO_FUT7.forEach(([f, t]) => out.push({ type: 'vfile', src: V(f), title: t }));
