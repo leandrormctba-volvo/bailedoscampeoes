@@ -531,3 +531,10 @@ button { font: inherit; color: inherit; }
 .plate2.bronze .medal { color: #3a1c06; background: radial-gradient(circle at 35% 30%, #ffd9b0, #c8793a 45%, #7a4318); }
 .plate2.bronze .dt { color: #e0a26c; }
 .plate2.bronze .lbl { background: #c8793a; color: #2a1404; }
+
+/* v8: slides de imagem e de vídeo em tela cheia (usados na Opção 2) */
+.slide.t-image, .slide.t-vfile { padding: 0 !important; }
+.fullimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.portrait .fullimg { object-fit: contain; }
+.slide.t-vfile { background: #000; cursor: pointer; }
+.vfull { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }

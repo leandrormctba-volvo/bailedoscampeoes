@@ -114,6 +114,12 @@
         <div class="vmain big rv" ${d(1)} data-yt="${(s.youtube && s.youtube[0] && s.youtube[0].id) || 'anim'}"><div class="ytbox"><div id="ytplayer"></div></div><div class="player paused" id="player" hidden></div></div>
       </div>`,
 
+    // imagem ocupando a tela toda (capa da Opção 2)
+    image: s => `<img class="fullimg" src="${s.img}" alt="${esc(s.alt || '')}">`,
+
+    // vídeo (arquivo) ocupando a tela toda; toca sozinho ao entrar no slide
+    vfile: s => `<video class="vfull" src="${s.src}" preload="none" playsinline title="${esc(s.title || '')}"></video>`,
+
     photo: s => `
       <div class="photoslide top">
         <div class="h2 rv" ${d(1)}>${esc(s.title)}</div>
@@ -286,6 +292,7 @@
     const type = s.dataset.type;
     if (type === 'champs' || type === 'team' || type === 'final' || type === 'race') setTimeout(confetti, 500);
     if (type === 'video') playCurrent(); else stopVideos();
+    playFile(s);
     prog.style.width = ((cur + 1) / slides.length * 100) + '%';
     counter.textContent = `${cur + 1} / ${slides.length}`;
     history.replaceState(null, '', '#' + (cur + 1));
@@ -297,11 +304,32 @@
     clearTimeout(autoT);
     if (!auto) return;
     const type = slides[cur].dataset.type;
-    if (type === 'video') return; // avança quando o vídeo terminar
+    if (type === 'video' || type === 'vfile') return; // avança quando o vídeo terminar
     const ms = { cover: 7000, numbers: 9000, list: 10000, champs: 9000, race: 12000, team: 8000, divider: 5000, photo: 7000, final: 0 }[type] ?? 8000;
     if (ms && cur < slides.length - 1) autoT = setTimeout(next, ms);
   }
   if (video) video.onEnd = () => { if (auto) next(); };
+
+  /* ---------- vídeos em arquivo (slides "vfile") ---------- */
+  // ao entrar: começa do início e toca (com som; se o navegador bloquear, toca sem som);
+  // ao sair: pausa. O próximo vídeo já vai sendo carregado.
+  const files = [...document.querySelectorAll('video.vfull')];
+  files.forEach(v => v.addEventListener('ended', () => { if (auto && slides[cur].contains(v)) next(); }));
+  function playFile(s) {
+    files.forEach(v => { if (!s.contains(v)) v.pause(); });
+    const v = s.querySelector('video.vfull');
+    const nxt = slides[cur + 1] && slides[cur + 1].querySelector('video.vfull');
+    if (nxt) nxt.preload = 'auto';
+    if (!v) return;
+    // tela cheia de verdade (quando a troca de slide veio de um clique ou tecla)
+    if (!document.fullscreenElement && document.documentElement.requestFullscreen)
+      document.documentElement.requestFullscreen().catch(() => {});
+    v.preload = 'auto'; v.muted = false;
+    try { v.currentTime = 0; } catch (e) {}
+    const p = v.play();
+    // só tenta de novo sem som se o navegador bloqueou o som (e o slide ainda está na tela)
+    if (p && p.catch) p.catch(err => { if (err && err.name === 'NotAllowedError' && s.classList.contains('active')) { v.muted = true; v.play().catch(() => {}); } });
+  }
 
   /* ---------- vídeos do YouTube (Família AV) ---------- */
   const firstItem = document.querySelector('.vitem.on') || document.querySelector('.vmain[data-yt]');
@@ -355,7 +383,8 @@
   bPlay.onclick = toggleAuto;
   const full = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   document.getElementById('bFull').onclick = full;
-  host.addEventListener('click', e => { if (e.target.closest('[data-next]')) next(); });
+  // clique no botão "próximo" de um slide, ou em qualquer lugar de um vídeo em tela cheia → próximo slide
+  host.addEventListener('click', e => { if (e.target.closest('[data-next]') || e.target.closest('.t-vfile')) next(); });
 
   addEventListener('keydown', e => {
     if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); next(); }

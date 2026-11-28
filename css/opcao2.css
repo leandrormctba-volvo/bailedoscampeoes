@@ -115,3 +115,9 @@ body::after { content: ''; position: fixed; inset: 0; pointer-events: none; opac
 .photoslide.top .bigframe { width: 1040px; height: 780px; }
 .photoslide.top { gap: 24px; }
 .plate2.bronze { background: linear-gradient(90deg, #0f4655, #0a2f3a); border-left-color: #c8793a; }
+
+/* Capa (Arte 8) e vídeos em tela cheia: sem selo, listras e logo por cima */
+#stage:has(.slide.active.t-image) .o2-corner, #stage:has(.slide.active.t-vfile) .o2-corner,
+#stage:has(.slide.active.t-image) .o2-stripes, #stage:has(.slide.active.t-vfile) .o2-stripes { opacity: 0; }
+body:has(.slide.active.t-image) .brand, body:has(.slide.active.t-vfile) .brand { opacity: 0; transition: opacity .4s; }
+body:has(.slide.active.t-vfile)::before, body:has(.slide.active.t-vfile)::after { background: #000; opacity: 1; animation: none; }
