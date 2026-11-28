@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="pt-BR"><head><meta charset="utf-8"><title>Banner 5 x 3 (painel intercalado) — Melhores do Ano AV 2026</title>
 <!-- Banner para impressão: proporção 5 x 3.
-     Painel de fotos (estilo "step and repeat"): intercala o selo "Melhores do Ano AV 2026"
-     e o logo Associação Volvo em duas linhas (Associação em cima, Volvo embaixo), tudo centralizado. -->
+     Painel de fotos: 4 colunas, cada uma com um "Melhores do Ano AV 2026" e um "Associação / Volvo",
+     colunas alternando um pouco mais para cima e mais para baixo. Tudo em branco.
+     Versões (no endereço): ?v=amarelo (AV 2026 em amarelo), ?v=branco (tudo branco), ?v=box (boxes 3D atrás). -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,37 +12,56 @@
     background:
       radial-gradient(60% 60% at 50% 45%, rgba(40,150,165,.35), transparent 70%),
       linear-gradient(160deg, #1a6474 0%, #0e4351 40%, #08303b 72%, #041c24 100%); }
-  /* faixas de luz suaves em diagonal */
   .beam { position: absolute; top: -300px; width: 220px; height: 1900px; transform: rotate(32deg);
-    background: linear-gradient(90deg, transparent, rgba(160,235,245,.08), transparent); }
+    background: linear-gradient(90deg, transparent, rgba(160,235,245,.07), transparent); }
   .vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(2,14,18,.45)); }
-  /* grade intercalada: 5 colunas x 4 linhas */
-  .grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 400px); grid-template-rows: repeat(4, 300px); z-index: 2; }
-  .cell { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-  /* selo Melhores do Ano */
-  .mda .st { width: 40px; height: 40px; margin-bottom: 10px; filter: drop-shadow(0 0 10px rgba(255,214,110,.7)); }
-  .mda b { display: block; font-family: 'Inter', Arial, sans-serif; font-weight: 900; text-transform: uppercase; font-size: 44px; line-height: .98; letter-spacing: -.01em; }
-  .mda b.av { color: #f2b632; margin-top: 4px; }
-  /* logo em duas linhas, recortado do logo oficial */
-  .av2 img { display: block; height: 42px; filter: drop-shadow(0 3px 10px rgba(0,0,0,.3)); }
-  .av2 img + img { margin-top: 14px; }
+
+  .item { position: absolute; width: 400px; height: 250px; margin: -125px 0 0 -200px; z-index: 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  /* Melhores do Ano AV 2026 */
+  .mda b { display: block; font-family: 'Inter', Arial, sans-serif; font-weight: 900; text-transform: uppercase; font-size: 58px; line-height: .98; letter-spacing: -.01em;
+    text-shadow: 0 4px 16px rgba(0,0,0,.3); }
+  .mda b.av { margin-top: 6px; }
+  .amarelo .mda b.av { color: #f2b632; }
+  /* Associação / Volvo (recortado do logo oficial) */
+  .av2 img { display: block; height: 54px; filter: drop-shadow(0 3px 10px rgba(0,0,0,.3)); }
+  .av2 img + img { margin-top: 18px; }
+
+  /* versão com boxes 3D: placa com face em degradê, brilho na borda de cima e "espessura" para baixo e para a direita */
+  .box .item { border-radius: 20px;
+    background: linear-gradient(160deg, #1d7486 0%, #0f4b5a 55%, #0a3a46 100%);
+    box-shadow:
+      inset 0 2px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.08),
+      2px 3px 0 #08323c, 4px 6px 0 #07303a, 6px 9px 0 #062b34, 8px 12px 0 #05262e, 10px 15px 0 #042129, 12px 18px 0 #031c23,
+      24px 44px 50px rgba(0,0,0,.55); }
+  .box .item::before { content: ''; position: absolute; inset: 0; border-radius: 20px; pointer-events: none;
+    background: linear-gradient(170deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 45%); }
+  .box .item::after { content: ''; position: absolute; left: 30px; right: 30px; bottom: 0; height: 4px; border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #f2b632, transparent); opacity: .8; }
 </style></head>
-<body><div class="art">
+<body><div class="art" id="art">
   <div class="beam" style="left:300px"></div><div class="beam" style="left:900px"></div><div class="beam" style="left:1500px"></div>
   <div class="vignette"></div>
-  <div class="grid" id="grid"></div>
 </div>
 <script>
+  const q = new URLSearchParams(location.search);
   // ?z=2 aumenta a arte (para gerar a imagem em alta resolução)
-  const z = parseFloat(new URLSearchParams(location.search).get('z'));
+  const z = parseFloat(q.get('z'));
   if (z) { document.documentElement.style.zoom = z; document.documentElement.style.overflow = 'hidden'; }
+  const v = q.get('v') || 'amarelo';
+  document.getElementById('art').classList.add(v);
 
-  const STAR = '<svg class="st" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1c1"/><stop offset=".5" stop-color="#f2b632"/><stop offset="1" stop-color="#a8680f"/></linearGradient></defs>' +
-    '<path d="M50 4 61 37 96 38 68 59 78 93 50 73 22 93 32 59 4 38 39 37Z" fill="url(#g)"/></svg>';
-  const MDA = `<div class="cell mda">${STAR}<b>Melhores</b><b>do ano</b><b class="av">AV 2026</b></div>`;
-  const AV2 = `<div class="cell av2"><img src="logo-associacao.png" alt="Associação"><img src="logo-volvo.png" alt="Volvo"></div>`;
+  const MDA = '<b>Melhores</b><b>do ano</b><b class="av">AV 2026</b>';
+  const AV2 = '<img src="logo-associacao.png" alt="Associação"><img src="logo-volvo.png" alt="Volvo">';
+  // 4 colunas; cada coluna tem um de cada, e as colunas alternam: uma mais para cima, a outra mais para baixo
+  const cols = [250, 750, 1250, 1750];
   let h = '';
-  for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) h += (r + c) % 2 === 0 ? MDA : AV2;
-  document.getElementById('grid').innerHTML = h;
+  cols.forEach((x, i) => {
+    const up = i % 2 === 0, y1 = up ? 300 : 400, y2 = y1 + 520;
+    const first = up ? ['mda', MDA] : ['av2', AV2], second = up ? ['av2', AV2] : ['mda', MDA];
+    h += `<div class="item ${first[0]}" style="left:${x}px;top:${y1}px">${first[1]}</div>`;
+    h += `<div class="item ${second[0]}" style="left:${x}px;top:${y2}px">${second[1]}</div>`;
+  });
+  document.getElementById('art').insertAdjacentHTML('beforeend', h);
 </script>
 </body></html>
